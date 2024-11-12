@@ -1,0 +1,28 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<main>
+    {% for genre, movies in movies_by_genre.items %}
+        <h2 id="{{ genre }}" >{{ genre }}</h2>
+        <div class="movies">
+            {% if movies %}
+                {% for movie in movies %}
+                    <a href="{% url 'details-movie' movie.id %}">
+                    <div class="movie">
+                        <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+                        <h3>{{ movie.title }}</h3>
+                        {% if movie.average_rating %}
+                            <p>Rating: {{ movie.average_rating }} <i class="fa-solid fa-star"></i></p>
+                        {% else %}
+                            <p>Not reviewed yet.</p>
+                        {% endif %}
+                    </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <h4 class="no-content">No {{ genre }} movies yet.</h4>
+            {% endif %}
+        </div>
+    {% endfor %}
+</main>
+{% endblock %}

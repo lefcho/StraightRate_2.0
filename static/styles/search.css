@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap');
+
+.search-results-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.search-results-container > p{
+    font-size: 1.3em;
+    display: flex;
+    justify-content: center;
+}
+
+.search-results-container h4 {
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+    margin: 0 auto;
+    padding: 0.5em 0.5em 0.5em 0;
+    text-transform: uppercase;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+}
+
+h6 {
+    font-size: 1em;
+    padding-bottom: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.developers > ul, .directors > ul {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7em;
+    background-color: rgba(0, 0, 0, 0.888);
+    padding: 2em;
+    border-radius: 10px;
+    -webkit-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    -moz-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+}
+
+li {
+    color: rgb(120, 230, 77);
+    list-style-type: none;
+}
+
+.developers a, .directors a {
+    font-family: "Handjet", sans-serif;
+    font-weight: 400;
+    font-size: 1.7em;
+    color: rgb(120, 230, 77);
+}

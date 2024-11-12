@@ -1,0 +1,79 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="search-results-container">
+        <h2>Search Results for "{{ query }}"</h2>
+
+        <h4>Movies</h4>
+        {% if movie_results %}
+            <div class="movies">
+                {% for movie in movie_results %}
+                    <a href="{% url 'details-movie' movie.id %}">
+                        <div class="movie">
+                            <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+                            <h3>{{ movie.title }}</h3>
+                            {% if movie.average_rating %}
+                                <p>Rating: {{ movie.average_rating }} <i class="fa-solid fa-star"></i></p>
+                            {% else %}
+                                <p>Not reviewed yet.</p>
+                            {% endif %}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No movie results found.</p>
+        {% endif %}
+
+        <h4>Video Games</h4>
+        {% if game_results %}
+            <div class="movies">
+                {% for game in game_results %}
+                    <a href="{% url 'details-movie' game.id %}">
+                        <div class="movie">
+                            <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
+                            <h3>{{ game.title }}</h3>
+                            {% if game.average_rating %}
+                                <p>Rating: {{ game.average_rating }} <i class="fa-solid fa-star"></i></p>
+                            {% else %}
+                                <p>Not reviewed yet.</p>
+                            {% endif %}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No video game results found.</p>
+        {% endif %}
+
+        {% if directors %}
+            <div class="directors">
+                <h4>Directors</h4>
+                <ul>
+                    {% for director in directors %}
+                        <li>
+                            <a href="{% url 'director' director.id %}" class="underline">
+                                {{ director.full_name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if developers %}
+            <div class="developers">
+                <h4>Developers</h4>
+                <ul>
+                    {% for developer in developers %}
+                        <li>
+                            <a href="{% url 'developer' developer.id %}" class="underline">
+                                {{ developer.developer_name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

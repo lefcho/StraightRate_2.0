@@ -1,0 +1,90 @@
+.poster {
+    width: 100%;
+    height: 250px;
+}
+
+#wrapper-main {
+    flex-grow: 1;
+    background-color: rgb(213, 213, 213);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 2em;
+}
+
+main h2 {
+    font-size: 2em;
+    padding: 0.7em;
+    display: flex;
+    justify-content: center;
+}
+
+.underline:hover {
+    text-decoration: underline;
+    color: #244ba2;
+    transition: all 300ms ease;
+}
+
+.movie, .game {
+    max-width: 200px;
+    text-align: center;
+    color: rgb(120, 230, 77);
+    padding: 0.5em;
+    border-style: solid;
+    border-color: rgba(81, 141, 39, 0.315);
+    border-radius: 1em;
+    transition: all .5s ease;
+    font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
+    outline: none;
+}
+
+.movie:hover, .game:hover {
+    h3 {
+        color: black;
+    }
+
+    color: rgb(0, 0, 0);
+    background-color: rgb(120, 230, 77);
+}
+
+.movie h3, .game h3 {
+    font-size: 1em;
+    text-align: center;
+    margin: 0;
+    padding: 3px 0;
+    color: rgb(120, 230, 77);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.no-content {
+    color: rgb(120, 230, 77);
+}
+
+.top-movies, .top-video-games, .movies, .video-games {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.888);
+    padding: 2em;
+    border-radius: 10px;
+    -webkit-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    -moz-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+}
+
+.movies, .video-games {
+    width: 70%;
+}
+
+.movie, .game p {
+    font-size: 1.2em;
+}

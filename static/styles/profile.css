@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap');
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    color: #d1a858;
+}
+
+.profile-info form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.5em;
+
+    input {
+        font-size: 1em;
+        padding: 0.1em;
+    }
+}
+
+.profile-info h1 {
+    font-size: 2.5em;
+    padding: 0.2em 0.5em;
+    margin: 0 auto;
+    display: inline-block;
+    color: #352727;
+}
+
+.reviews {
+    max-width: 70%;
+}
+
+.review {
+    padding: 1em;
+    font-size: 1.5em;
+}
+
+.review a {
+    color: #3587c3;
+}
+
+.review a:hover {
+    text-decoration: underline;
+}
+
+.review-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.display-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.review-label {
+    padding-right: 0.3em;
+    display: inline;
+    color: #d1a858;
+}

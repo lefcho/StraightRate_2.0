@@ -1,0 +1,19 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <h2>Movies by {{ director.first_name }} {{ director.last_name }}</h2>
+        <div class="movies">
+            {% for movie in movies %}
+                <a href="{% url 'details-movie' movie.id %}">
+                    <div class="movie">
+                        <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+                        <h3>{{ movie.title }}</h3>
+                        <p>{{ movie.average_rating }}<i class="fa-solid fa-star"></i></p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

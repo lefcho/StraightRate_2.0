@@ -1,0 +1,18 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="error-container">
+        <div class="error-image-cont">
+            <img src="{% static 'images/robot-removed_bg+404.png' %}">
+        </div>
+        <div class="error-text-cont">
+            <p class="error-text">Uh oh. <br> Something went wrong.</p>
+            <div class="wrapper-home-btn">
+                <a class="go-home-btn" href="{% url 'home' %}">
+                    <span>Go home</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

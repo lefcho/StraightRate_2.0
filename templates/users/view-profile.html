@@ -1,0 +1,62 @@
+{% extends 'common/base.html' %}
+{% block content %}
+{% load static %}
+<main>
+
+    <div class="profile-info">
+        <h1>Your Profile</h1>
+        <form class="edited" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="button" id="edit-profile-btn" class="btn btn-primary">Edit Profile</button>
+            <button type="submit" id="save-profile-btn" class="btn btn-success hidden" name="profile_update">Save
+                Changes
+            </button>
+            <button type="button" id="cancel-edit-btn" class="btn btn-danger hidden">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Movie Reviews Section -->
+    <h2 class="roboto-h2" >Your Movie Reviews</h2>
+    <div class="reviews">
+        {% for review in movie_reviews %}
+            <div class="review">
+                <h3><a href="{% url 'details-movie' review.movie.id %}">{{ review.movie.title }}</a></h3>
+                <div class="review-info">
+                    <div class="display-row">
+                        <p class="review-label">Rating:</p>
+                        <p>{{ review.rating }} <i class="fa-solid fa-star"></i></p>
+                    </div>
+                    <div class="display-row">
+                        <p class="review-label">Comment:</p>
+                        <p>{{ review.comment }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Video Game Reviews Section -->
+    <h2 class="roboto-h2" >Your Video Game Reviews</h2>
+    <div class="reviews">
+        {% for review in video_game_reviews %}
+            <div class="review">
+                <h3><a href="{% url 'details-video-game' review.video_game.id %}">{{ review.video_game.title }}</a>
+                </h3>
+                <div class="review-info">
+                    <div class="display-row">
+                        <p class="review-label">Rating:</p>
+                        <p>{{ review.rating }} <i class="fa-solid fa-star"></i></p>
+                    </div>
+                    <div class="display-row">
+                        <p class="review-label">Comment:</p>
+                        <p>{{ review.comment }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+
+<script type="text/javascript" src="{% static 'scripts/editProfileFieldsHandler.js' %}"></script>
+{% endblock %}

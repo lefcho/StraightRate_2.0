@@ -1,0 +1,18 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="form-wrapper">
+        <div class="form-title-cont">
+            <h2>Create Account</h2>
+            <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+        </div>
+        <form class="edited" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <div class="wrapper-in-btn">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

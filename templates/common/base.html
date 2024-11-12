@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link rel="icon" href="{% static 'images/logo_SR_transparent.png' %}">
+    <script src="https://kit.fontawesome.com/5aadc520af.js" crossorigin="anonymous"></script>
+    <title>Straight Rate</title>
+</head>
+<body>
+<header>
+    <div id="head-1">
+        <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/logo_SR_transparent.png' %}" alt="logo"></a>
+        <ul>
+            <li><a href="{% url 'movie-dashboard' %}">Movies</a></li>
+            <li><a href="{% url 'video-games-dashboard' %}">Video Games</a></li>
+        </ul>
+    </div>
+    <form method="GET" action="{% url 'search' %}">
+        <div class="flexbox">
+            <div class="search">
+                <div>
+                    <input class="search-input" type="text" name="q" placeholder="Search . . ." required>
+                    <button class="circle" type="submit"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id="head-2">
+        <ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'view-profile' %}">View Profile</a></li>
+                <li><a href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Log in</a></li>
+                <li><a href="{% url 'signup' %}">Create an Account</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</header>
+<div id="wrapper-main">
+    {% block content %}
+    {% endblock %}
+</div>
+<footer>
+    <p>&copy; 2024 StraightRate. You have your rights.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,77 @@
+form.edited {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    padding: 3em;
+    padding-bottom: 2em;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.888);
+    max-width: 35%;
+    border-radius: 20px;
+    -webkit-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    -moz-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+}
+
+.form-control {
+    color: rgba(0, 0, 0, 0.888);
+    font-size: 1.5em;
+    padding: 0.5em;
+    border-radius: 10px;
+    background-color: rgb(232, 240, 254);
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form .btn {
+    text-transform: uppercase;
+    padding: 0.2em;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: all .5s ease;
+    color: rgb(120, 230, 77);
+    border: 3px solid rgb(120, 230, 77);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.888);
+}
+
+form .btn:hover , form .btn:focus{
+    color: rgba(0, 0, 0, 0.888);
+    background-color: rgb(120, 230, 77);
+}
+
+form li {
+    margin: 0 auto;
+    padding-bottom: 0.7em;
+    font-size: 1.1em;
+    list-style-type: none;
+    color: rgb(120, 230, 77);
+}
+
+.form-title-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-title-cont a {
+    color: rgb(16, 0, 190);
+}
+
+.form-title-cont h2 {
+    font-size: 3em;
+    padding-bottom: 0.1em;
+
+}
+
+.form-title-cont p{
+    font-size: 1.2em;
+}
+
+.form-title-cont {
+    padding: 1em;
+}

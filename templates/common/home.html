@@ -1,0 +1,32 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+{% load static %}
+<main>
+    <h2>Top Movies</h2>
+    <div class="top-movies">
+        {% for movie in top_movies %}
+            <a href="{% url 'details-movie' movie.id %}">
+            <div class="movie">
+                <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+                <h3>{{ movie.title }}</h3>
+                <p>{{ movie.average_rating }}<i class="fa-solid fa-star"></i></p>
+            </div>
+            </a>
+        {% endfor %}
+    </div>
+    <h2>Top Video Games</h2>
+    <div class="top-video-games">
+        {% for game in top_games %}
+            <a href="{% url 'details-video-game' game.id %}">
+            <div class="game">
+                <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
+                <h3>{{ game.title }}</h3>
+                <p>{{ game.average_rating }}<i class="fa-solid fa-star"></i></p>
+            </div>
+            </a>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
