@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "StraightRate_2.accounts.apps.AccountsConfig",
+    "StraightRate_2.reviews.apps.ReviewsConfig",
+    "StraightRate_2.media.apps.MediaConfig",
+    "StraightRate_2.creators.apps.CreatorsConfig"
 ]
 
 MIDDLEWARE = [
@@ -120,6 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = (
+    BASE_DIR / 'static/',
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
