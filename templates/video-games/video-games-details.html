@@ -5,33 +5,35 @@
     <main>
         <div class="details">
             <div class="image-container">
-                <img class="poster" src="{{ video_game.poster.url }}" alt="{{ video_game.title }} Poster">
+                <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
             </div>
             <div class="info-cont">
                 <div class="big-info-cont">
                     <div class="title-cont">
-                        <h1 class="big-title">{{ video_game.title }}</h1>
-                        {% if video_game.average_rating %}
-                            <p>{{ video_game.average_rating }} <i class="fa-solid fa-star"></i></p>
+                        <h1 class="big-title">{{ game.title }}</h1>
+                        {% if game.get_average_rating %}
+                            <p>{{ game.get_average_rating }} <i class="fa-solid fa-star"></i></p>
                         {% else %}
                             <p>Not reviewed yet.</p>
                         {% endif %}
                     </div>
                     <div class="small-info-cont">
                         <p class="small-info">Released:</p>
-                        <h5 class="info">{{ video_game.release_date }}</h5>
+                        <h5 class="info">{{ game.release_date }}</h5>
                         <p class="seperator"> | </p>
-                        <p class="small-info">Genre:</p>
-                        <a href="{% url 'video-games-dashboard' %}#{{ video_game.genre }}">
-                            <h5 class="info underline">{{ video_game.genre }}</h5>
+                        <p class="small-info">Genre/s:</p>
+                        <a href="#">
+                            {% for genre in game.genres.all %}
+                                <h5 class="info underline">{{ genre }}</h5>
+                            {% endfor %}
                         </a>
                         <p class="seperator"> | </p>
                         <p class="small-info">Developer:</p>
-                        <a href="{% url 'developer' video_game.developer_id %}">
-                            <h5 class="info underline">{{ video_game.developer.developer_name }}</h5>
+                        <a href="#">
+                            <h5 class="info underline">{{ game.developer.developer_name }}</h5>
                         </a>
                     </div>
-                    <p class="description">{{ video_game.description }}</p>
+                    <p class="description">{{ game.description }}</p>
                 </div>
             </div>
         </div>

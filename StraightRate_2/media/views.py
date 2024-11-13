@@ -1,7 +1,6 @@
-from django.shortcuts import render
 from django.views.generic import DetailView
 
-from StraightRate_2.media.models import Movie
+from StraightRate_2.media.models import Movie, VideoGame
 
 
 class MovieDetailView(DetailView):
@@ -51,3 +50,22 @@ class MovieDetailView(DetailView):
 #         'form': form,
 #     }
 #     return render(request, 'movies/movie-details.html', context)
+
+
+class VideoGameDetailView(DetailView):
+    model = VideoGame
+    template_name = 'video-games/video-games-details.html'
+    context_object_name = 'game'
+    pk_url_kwarg = 'game_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['reviews'] = self.object.reviews.all()
+        context['user_review'] = None
+        context['form'] = None
+
+        if self.request.user.is_authenticated:
+            context['user_review'] = self.object.reviews.filter(user=self.request.user).first()
+
+        return context
