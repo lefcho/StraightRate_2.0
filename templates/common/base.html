@@ -15,11 +15,11 @@
     <div id="head-1">
         <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/logo_SR_transparent.png' %}" alt="logo"></a>
         <ul>
-            <li><a href="{% url 'movie-dashboard' %}">Movies</a></li>
-            <li><a href="{% url 'video-games-dashboard' %}">Video Games</a></li>
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">Video Games</a></li>
         </ul>
     </div>
-    <form method="GET" action="{% url 'search' %}">
+    <form method="GET">
         <div class="flexbox">
             <div class="search">
                 <div>
@@ -32,11 +32,11 @@
     <div id="head-2">
         <ul>
             {% if user.is_authenticated %}
-                <li><a href="{% url 'view-profile' %}">View Profile</a></li>
-                <li><a href="{% url 'logout' %}">Log out</a></li>
+                <li><a href="#">View Profile</a></li>
+                <li><a href="#">Log out</a></li>
             {% else %}
-                <li><a href="{% url 'login' %}">Log in</a></li>
-                <li><a href="{% url 'signup' %}">Create an Account</a></li>
+                <li><a href="#">Log in</a></li>
+                <li><a href="#">Create an Account</a></li>
             {% endif %}
         </ul>
     </div>

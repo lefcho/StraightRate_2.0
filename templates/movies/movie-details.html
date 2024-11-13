@@ -10,8 +10,8 @@
                 <div class="big-info-cont">
                     <div class="title-cont">
                         <h1 class="big-title">{{ movie.title }}</h1>
-                        {% if movie.average_rating %}
-                            <p>{{ movie.average_rating }} <i class="fa-solid fa-star"></i></p>
+                        {% if movie.get_average_rating %}
+                            <p>{{ movie.get_average_rating }} <i class="fa-solid fa-star"></i></p>
                         {% else %}
                             <p>Not reviewed yet.</p>
                         {% endif %}
@@ -23,17 +23,21 @@
 
                         <p class="seperator"> | </p>
 
-                        <p class="small-info">Genre:</p>
-                        <a href="{% url 'movie-dashboard' %}#{{ movie.genre }}">
-                            <h5 class="info underline">{{ movie.genre }}</h5>
+                        <p class="small-info">Genres:</p>
+                        <a href="#">
+                            {% for genre in movie.genres.all %}
+                                <h5 class="info underline">{{ genre }}</h5>
+                            {% endfor %}
                         </a>
 
 
                         <p class="seperator"> | </p>
 
-                        <p class="small-info">Director:</p>
-                        <a href="{% url 'director' movie.director_id %}">
-                            <h5 class="info underline">{{ movie.director_full_name }}</h5>
+                        <p class="small-info">Director/s:</p>
+                        <a href="#">
+                            {% for director in movie.directors.all %}
+                                <h5 class="info underline">{{ director }}</h5>
+                            {% endfor %}
                         </a>
                     </div>
 

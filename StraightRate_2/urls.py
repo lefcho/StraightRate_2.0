@@ -6,6 +6,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('StraightRate_2.common.urls')),
+    path('movies/', include('StraightRate_2.media.urls')),
+
 ]
 
 if settings.DEBUG:

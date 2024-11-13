@@ -68,4 +68,4 @@ class VideoGameReview(Review):
     )
 
     def __str__(self):
-        return f'{self.user.username} gave {self.video_game.title} a {self.rating}'
+        return f'{self.user.username} gave {self.game.title} a {self.rating}'

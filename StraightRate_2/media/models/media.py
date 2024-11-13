@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 
 from StraightRate_2.creators.models import Developer, Director
 from StraightRate_2.media.models.genres import MovieGenre, VideoGameGenre
@@ -21,19 +22,21 @@ class AbstractMedia(models.Model):
         verbose_name='Release Date',
     )
 
+    def get_average_rating(self):
+        avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
+        return round(avg_rating, 1) if avg_rating is not None else None
+
 
 class Movie(AbstractMedia):
-    genre = models.ManyToManyField(
+    genres = models.ManyToManyField(
         to=MovieGenre,
         related_name='movies',
     )
 
-    director = models.ForeignKey(
+    directors = models.ManyToManyField(
         to=Director,
-        null=True,
-        on_delete=models.SET_NULL,
         related_name='movies',
-        verbose_name='Director',
+        verbose_name='Directors',
     )
 
     poster = models.ImageField(
@@ -48,7 +51,7 @@ class Movie(AbstractMedia):
 
 
 class VideoGame(AbstractMedia):
-    genre = models.ManyToManyField(
+    genres = models.ManyToManyField(
         to=VideoGameGenre,
         related_name='games',
     )
