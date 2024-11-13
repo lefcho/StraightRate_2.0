@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "StraightRate_2.accounts.apps.AccountsConfig",
     "StraightRate_2.reviews.apps.ReviewsConfig",
     "StraightRate_2.media.apps.MediaConfig",
-    "StraightRate_2.creators.apps.CreatorsConfig"
+    "StraightRate_2.creators.apps.CreatorsConfig",
+    "StraightRate_2.common.apps.CommonConfig"
 ]
 
 MIDDLEWARE = [
