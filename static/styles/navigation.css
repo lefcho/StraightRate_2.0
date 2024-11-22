@@ -66,21 +66,28 @@ h2 {
     color: rgb(120, 230, 77);
 }
 
-#head-2 ul li a {
+#head-2 ul li a, .logout-btn {
     color: rgb(115, 225, 214);
 }
 
-header a {
+header a, .logout-btn {
     text-transform: uppercase;
     font-family: "DM Serif Text", serif;
     font-weight: 400;
 }
 
-#head-1 ul li a:hover, #head-2 ul li a:hover {
+#head-1 ul li a:hover, #head-2 ul li a:hover, .logout-btn:hover {
     color: #244ba2;
     transition: all 300ms ease;
     text-decoration: underline;
 }
+
+.logout-btn {
+    font-size: 1em;
+    border: none;
+    background-color: transparent;
+}
+
 
 .flexbox {
     background: transparent;
