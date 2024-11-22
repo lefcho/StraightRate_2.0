@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from StraightRate_2.accounts.forms import RegisterForm
+from StraightRate_2.accounts.forms import RegisterForm, LoginForm
 
 UserModel = get_user_model()
 
@@ -24,4 +24,6 @@ class RegisterView(CreateView):
 
 
 class UserLoginView(LoginView):
+    form_class = LoginForm
     template_name = 'users/login.html'
+

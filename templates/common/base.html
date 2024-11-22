@@ -33,9 +33,9 @@
         <ul>
             {% if user.is_authenticated %}
                 <li><a href="#">View Profile</a></li>
-                <li><a href="#">Log out</a></li>
+                <li><a href="{% url 'logout' %}">Log out</a></li>
             {% else %}
-                <li><a href="#">Log in</a></li>
+                <li><a href="{% url 'login' %}">Log in</a></li>
                 <li><a href="{% url 'register' %}">Create an Account</a></li>
             {% endif %}
         </ul>
