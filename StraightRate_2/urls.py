@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('StraightRate_2.common.urls')),
     path('media/', include('StraightRate_2.media.urls')),
+    path('accounts/', include('StraightRate_2.accounts.urls')),
 
 ]
 
