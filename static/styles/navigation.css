@@ -176,3 +176,38 @@ header a, .logout-btn {
 .search > div > input:not(:placeholder-shown) {
     width: 320px;
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    font-size: 0.8em;
+    display: none;
+    position: absolute;
+    background-color: #3d1515;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 0.3em;
+    z-index: 99;
+
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 12px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-content a:hover {
+    background-color: black;
+}
+
+.dropdown:hover .dropdown-content {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+
+}
