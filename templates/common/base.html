@@ -1,3 +1,5 @@
+{% load video_game_genres %}
+{% load movie_genres %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -18,23 +20,20 @@
             <li class="dropdown">
                 <a href="#" class="dropbtn">Movies</a>
                 <div class="dropdown-content">
-                    <a href="#">Action</a>
-                    <a href="#">SciFi</a>
-                    <a href="#">Comedy</a>
-                    <a href="#">Drama</a>
-                    <a href="#">Horror</a>
-
+                    {% movie_genres as m_genres %}
+                    {% for genre in m_genres %}
+                        <a href="#">{{ genre.genre_name }}</a>
+                    {% endfor %}
                 </div>
             </li>
 
             <li class="dropdown">
                 <a href="#" class="dropbtn">Video Games</a>
                 <div class="dropdown-content">
-                    <a href="#">RPG</a>
-                    <a href="#">Shooter</a>
-                    <a href="#">Adventure</a>
-                    <a href="#">Sports</a>
-                    <a href="#">Strategy</a>
+                    {% game_genres as g_genres %}
+                    {% for genre in g_genres %}
+                        <a href="#">{{ genre.genre_name }}</a>
+                    {% endfor %}
                 </div>
             </li>
         </ul>
