@@ -30,6 +30,9 @@ class Review(models.Model):
         auto_now=True,
     )
 
+    def get_like_count(self):
+        return self.likes.count()
+
 
 class MovieReview(Review):
     class Meta:
