@@ -1,13 +1,6 @@
 from django.urls import path
+from .views import MovieRetrieveAPIView
 
-from StraightRate_2.media import views
-
-urlpatterns = (
-    path('<int:movie_id>/details-movie/',
-         views.MovieDetailView.as_view(),
-         name='details-movie'),
-    path('<int:game_id>/details-game/',
-         views.VideoGameDetailView.as_view(),
-         name='details-game'),
-
-)
+urlpatterns = [
+    path('movies/<int:pk>/', MovieRetrieveAPIView.as_view(), name='details-movie'),
+]

@@ -17,7 +17,6 @@ from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -29,8 +28,15 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
+
+STRAIGHT_RATE_APPS = [
+    "StraightRate_2.accounts.apps.AccountsConfig",
+    "StraightRate_2.reviews.apps.ReviewsConfig",
+    "StraightRate_2.media.apps.MediaConfig",
+    "StraightRate_2.creators.apps.CreatorsConfig",
+    "StraightRate_2.common.apps.CommonConfig",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,12 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "StraightRate_2.accounts.apps.AccountsConfig",
-    "StraightRate_2.reviews.apps.ReviewsConfig",
-    "StraightRate_2.media.apps.MediaConfig",
-    "StraightRate_2.creators.apps.CreatorsConfig",
-    "StraightRate_2.common.apps.CommonConfig"
-]
+
+    'rest_framework',
+] + STRAIGHT_RATE_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,7 +79,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'StraightRate_2.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -110,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -121,7 +122,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

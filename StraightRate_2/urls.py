@@ -8,7 +8,7 @@ urlpatterns = [
     path('', include('StraightRate_2.common.urls')),
     path('media/', include('StraightRate_2.media.urls')),
     path('accounts/', include('StraightRate_2.accounts.urls')),
-
+    path('reviews/', include('StraightRate_2.reviews.urls')),
 ]
 
 if settings.DEBUG:

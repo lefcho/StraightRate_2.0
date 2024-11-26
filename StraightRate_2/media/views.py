@@ -1,25 +1,33 @@
-from django.views.generic import DetailView
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.permissions import AllowAny
 
 from StraightRate_2.media.models import Movie, VideoGame
+from StraightRate_2.media.serializers import MovieSerializer
 
 
-class MovieDetailView(DetailView):
-    model = Movie
-    template_name = 'movies/movie-details.html'
-    context_object_name = 'movie'
-    pk_url_kwarg = 'movie_id'
+class MovieRetrieveAPIView(RetrieveAPIView):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+    permission_classes = [AllowAny]
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
 
-        context['reviews'] = self.object.reviews.all()
-        context['user_review'] = None
-        context['form'] = None
-
-        if self.request.user.is_authenticated:
-            context['user_review'] = self.object.reviews.filter(user=self.request.user).first()
-
-        return context
+# class MovieDetailView(DetailView):
+#     model = Movie
+#     template_name = 'movies/movie-details.html'
+#     context_object_name = 'movie'
+#     pk_url_kwarg = 'movie_id'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#
+#         context['reviews'] = self.object.reviews.all()
+#         context['user_review'] = None
+#         context['form'] = None
+#
+#         if self.request.user.is_authenticated:
+#             context['user_review'] = self.object.reviews.filter(user=self.request.user).first()
+#
+#         return context
 
 
 # def details_movie_view(request, movie_id):
@@ -52,20 +60,20 @@ class MovieDetailView(DetailView):
 #     return render(request, 'movies/movie-details.html', context)
 
 
-class VideoGameDetailView(DetailView):
-    model = VideoGame
-    template_name = 'video-games/video-games-details.html'
-    context_object_name = 'game'
-    pk_url_kwarg = 'game_id'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context['reviews'] = self.object.reviews.all()
-        context['user_review'] = None
-        context['form'] = None
-
-        if self.request.user.is_authenticated:
-            context['user_review'] = self.object.reviews.filter(user=self.request.user).first()
-
-        return context
+# class VideoGameDetailView(DetailView):
+#     model = VideoGame
+#     template_name = 'video-games/video-games-details.html'
+#     context_object_name = 'game'
+#     pk_url_kwarg = 'game_id'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#
+#         context['reviews'] = self.object.reviews.all()
+#         context['user_review'] = None
+#         context['form'] = None
+#
+#         if self.request.user.is_authenticated:
+#             context['user_review'] = self.object.reviews.filter(user=self.request.user).first()
+#
+#         return context
