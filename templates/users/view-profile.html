@@ -1,62 +1,88 @@
 {% extends 'common/base.html' %}
 {% block content %}
-{% load static %}
-<main>
+    {% load static %}
+    <main>
 
-    <div class="profile-info">
-        <h1>Your Profile</h1>
-        <form class="edited" method="POST" action="{% url 'update-profile' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="button" id="edit-profile-btn" class="btn btn-primary">Edit Profile</button>
-            <button type="submit" id="save-profile-btn" class="btn btn-success hidden" name="profile_update">Save
-                Changes
-            </button>
-            <button type="button" id="cancel-edit-btn" class="btn btn-danger hidden">Cancel</button>
-        </form>
-    </div>
-
-    <!-- Movie Reviews Section -->
-    <h2 class="roboto-h2" >Your Movie Reviews</h2>
-    <div class="reviews">
-        {% for review in movie_reviews %}
-            <div class="review">
-                <h3><a href="#">{{ review.movie.title }}</a></h3>
-                <div class="review-info">
-                    <div class="display-row">
-                        <p class="review-label">Rating:</p>
-                        <p>{{ review.rating }} <i class="fa-solid fa-star"></i></p>
-                    </div>
-                    <div class="display-row">
-                        <p class="review-label">Comment:</p>
-                        <p>{{ review.comment }}</p>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-
-    <!-- Video Game Reviews Section -->
-    <h2 class="roboto-h2" >Your Video Game Reviews</h2>
-    <div class="reviews">
-        {% for review in video_game_reviews %}
-            <div class="review">
-                <h3><a href="#">{{ review.game.title }}</a>
-                </h3>
-                <div class="review-info">
-                    <div class="display-row">
-                        <p class="review-label">Rating:</p>
-                        <p>{{ review.rating }} <i class="fa-solid fa-star"></i></p>
-                    </div>
-                    <div class="display-row">
-                        <p class="review-label">Comment:</p>
-                        <p>{{ review.comment }}</p>
+        <div class="profile-info">
+            <h1>Your Profile</h1>
+            <div class="profile-details">
+                <form class="edited" method="POST" action="{% url 'update-profile' %}">
+                    <h3 class="edit-prof-title">Edit Profile</h3>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="button" id="edit-profile-btn" class="btn btn-primary">Edit</button>
+                    <button type="submit" id="save-profile-btn" class="btn btn-success hidden" name="profile_update">
+                        Save
+                        Changes
+                    </button>
+                    <button type="button" id="cancel-edit-btn" class="btn btn-danger hidden">Cancel</button>
+                </form>
+                <div class="points-cont">
+                    <h2 class="points">Your Points: {{ user.points }}</h2>
+                    <div class="points-info">
+                        <h3 class="points-question">How do I earn points?</h3>
+                        <ul class="points-ul">
+                            <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">Posting a review gives you 5 points.</li></div>
+                            <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">Every like on your review give you an additional 10 points</li></div>
+                        </ul>
+                        <h3 class="points-question">What are points used for?</h3>
+                        <ul class="points-ul">
+                            <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">By reaching 500 points you will be granted the ability to
+                                suggest video games
+                                or movies to be added to the website.
+                            </li></div>
+                            <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">By reaching 5000 points you will be able to approve a suggested
+                                video game or movie!
+                            </li></div>
+                            <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">Each video game or movie that you approve will cost 100 points.
+                            </li></div>
+                        </ul>
                     </div>
                 </div>
             </div>
-        {% endfor %}
-    </div>
-</main>
+        </div>
 
-<script type="text/javascript" src="{% static 'scripts/editProfileFieldsHandler.js' %}"></script>
+        <!-- Movie Reviews Section -->
+        <h2 class="roboto-h2">Your Movie Reviews</h2>
+        <div class="reviews">
+            {% for review in movie_reviews %}
+                <div class="review">
+                    <h3><a href="#">{{ review.movie.title }}</a></h3>
+                    <div class="review-info">
+                        <div class="display-row">
+                            <p class="review-label">Rating:</p>
+                            <p>{{ review.rating }} <i class="fa-solid fa-star"></i></p>
+                        </div>
+                        <div class="display-row">
+                            <p class="review-label">Comment:</p>
+                            <p>{{ review.comment }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Video Game Reviews Section -->
+        <h2 class="roboto-h2">Your Video Game Reviews</h2>
+        <div class="reviews">
+            {% for review in video_game_reviews %}
+                <div class="review">
+                    <h3><a href="#">{{ review.game.title }}</a>
+                    </h3>
+                    <div class="review-info">
+                        <div class="display-row">
+                            <p class="review-label">Rating:</p>
+                            <p>{{ review.rating }} <i class="fa-solid fa-star"></i></p>
+                        </div>
+                        <div class="display-row">
+                            <p class="review-label">Comment:</p>
+                            <p>{{ review.comment }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <script type="text/javascript" src="{% static 'scripts/editProfileFieldsHandler.js' %}"></script>
 {% endblock %}

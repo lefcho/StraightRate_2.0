@@ -1,6 +1,5 @@
 // Handle Profile Edit and Cancel
 
-// Store the original values in a variable
 let originalValues = {};
 
 // When the "Edit" button is clicked

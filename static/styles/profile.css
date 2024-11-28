@@ -15,8 +15,10 @@
     flex-direction: column;
     align-items: flex-start;
     font-size: 1.5em;
+    max-width: 500px;
 
     input {
+        width: 100%;
         font-size: 1em;
         padding: 0.1em;
     }
@@ -28,6 +30,62 @@
     margin: 0 auto;
     display: inline-block;
     color: #352727;
+}
+
+.profile-details {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (min-width: 1500px) {
+    .profile-details {
+        flex-direction: row;
+    }
+}
+
+.edit-prof-title {
+    font-size: 1.4em;
+    margin: 0 auto;
+    text-transform: uppercase;
+    color: rgba(127, 255, 0, 0.8);
+}
+
+.points-info{
+    font-size: 1.4em;
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.li-points-info {
+    color: black;
+}
+
+.points-question {
+    color: rgba(76, 124, 30, 0.8);
+}
+
+.points-ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding-left: 1em;
+}
+
+.combine {
+    display: flex;
+    flex-direction: row;
+}
+
+.p-1 {
+    padding-right: 5px;
 }
 
 .reviews {
