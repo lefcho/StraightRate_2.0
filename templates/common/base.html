@@ -51,7 +51,7 @@
     <div id="head-2">
         <ul>
             {% if user.is_authenticated %}
-                <li><a href="#">View Profile</a></li>
+                <li><a href="{% url 'view-profile' %}">View Profile</a></li>
                 <li>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}

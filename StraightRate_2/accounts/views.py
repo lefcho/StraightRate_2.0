@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 
 from StraightRate_2.accounts.forms import RegisterForm, LoginForm, AppUserChangeForm
+from StraightRate_2.reviews.models import MovieReview, VideoGameReview
 
 UserModel = get_user_model()
 
@@ -28,6 +29,27 @@ class UserLoginView(LoginView):
     template_name = 'users/login.html'
 
 
-class ViewProfileView(LoginRequiredMixin, DetailView):
-    template_name = 'users/view-profile.html'
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = UserModel
+    template_name = 'users/view-profile.html'
+    context_object_name = 'user'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['movie_reviews'] = MovieReview.objects.filter(user=self.request.user)
+        context['video_game_reviews'] = VideoGameReview.objects.filter(user=self.request.user)
+        context['form'] = AppUserChangeForm(instance=self.request.user)
+        return context
+
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = UserModel
+    form_class = AppUserChangeForm
+    success_url = reverse_lazy('view-profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+

@@ -5,7 +5,7 @@
 
     <div class="profile-info">
         <h1>Your Profile</h1>
-        <form class="edited" method="POST">
+        <form class="edited" method="POST" action="{% url 'update-profile' %}">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="button" id="edit-profile-btn" class="btn btn-primary">Edit Profile</button>
@@ -21,7 +21,7 @@
     <div class="reviews">
         {% for review in movie_reviews %}
             <div class="review">
-                <h3><a href="{% url 'details-movie' review.movie.id %}">{{ review.movie.title }}</a></h3>
+                <h3><a href="#">{{ review.movie.title }}</a></h3>
                 <div class="review-info">
                     <div class="display-row">
                         <p class="review-label">Rating:</p>
@@ -41,7 +41,7 @@
     <div class="reviews">
         {% for review in video_game_reviews %}
             <div class="review">
-                <h3><a href="{% url 'details-video-game' review.video_game.id %}">{{ review.video_game.title }}</a>
+                <h3><a href="#">{{ review.game.title }}</a>
                 </h3>
                 <div class="review-info">
                     <div class="display-row">

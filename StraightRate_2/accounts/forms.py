@@ -5,9 +5,19 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm, Authenti
 UserModel = get_user_model()
 
 
-class AppUserChangeForm(UserChangeForm):
-    class Meta(UserChangeForm.Meta):
+class AppUserChangeForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AppUserChangeForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['disabled'] = True
+
+    class Meta:
         model = UserModel
+        fields = ['username', 'first_name', 'last_name', 'email']
+        help_texts = {
+            'username': None,
+            'email': None,
+        }
 
 
 class RegisterForm(UserCreationForm):
