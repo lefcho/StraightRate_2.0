@@ -22,6 +22,10 @@ class AbstractMedia(models.Model):
         verbose_name='Release Date',
     )
 
+    approved = models.BooleanField(
+        default=False,
+    )
+
     def get_average_rating(self):
         avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
         return round(avg_rating, 1) if avg_rating is not None else None
