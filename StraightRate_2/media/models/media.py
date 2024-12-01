@@ -32,6 +32,11 @@ class AbstractMedia(models.Model):
 
 
 class Movie(AbstractMedia):
+    class Meta:
+        permissions = [
+            ('can_approve_movies', 'Can approve movies'),
+        ]
+
     genres = models.ManyToManyField(
         to=MovieGenre,
         related_name='movies',
@@ -55,6 +60,11 @@ class Movie(AbstractMedia):
 
 
 class VideoGame(AbstractMedia):
+    class Meta:
+        permissions = [
+            ('can_approve_games', 'Can approve video games'),
+        ]
+
     genres = models.ManyToManyField(
         to=VideoGameGenre,
         related_name='games',
