@@ -34,6 +34,7 @@ class AbstractMedia(models.Model):
 class Movie(AbstractMedia):
     class Meta:
         permissions = [
+            ('can_suggest_movies', 'Can suggest movies'),
             ('can_approve_movies', 'Can approve movies'),
         ]
 
@@ -62,6 +63,7 @@ class Movie(AbstractMedia):
 class VideoGame(AbstractMedia):
     class Meta:
         permissions = [
+            ('can_suggest_games', 'Can suggest video games'),
             ('can_approve_games', 'Can approve video games'),
         ]
 
