@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models import Avg
-
 from StraightRate_2.creators.models import Developer, Director
 from StraightRate_2.media.models.genres import MovieGenre, VideoGameGenre
 

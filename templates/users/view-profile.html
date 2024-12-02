@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load suggest_permission_tag %}
 {% block content %}
 {% load static %}
 <main>
@@ -22,21 +23,41 @@
                 <div class="points-info">
                     <h3 class="points-question">How do I earn points?</h3>
                     <ul class="points-ul">
-                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">Posting a review gives you 5 points.</li></div>
-                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">Every like on your review give you an additional 10 points</li></div>
+                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i>
+                            <li class="li-points-info">Posting a review gives you 5 points.</li>
+                        </div>
+                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i>
+                            <li class="li-points-info">Every like on your review give you an additional 10 points
+                            </li>
+                        </div>
                     </ul>
                     <h3 class="points-question">What are points used for?</h3>
                     <ul class="points-ul">
-                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">By reaching 500 points you will be granted the ability to
-                            suggest video games
-                            or movies to be added to the website.
-                        </li></div>
-                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">By reaching 5000 points you will be able to approve a suggested
-                            video game or movie!
-                        </li></div>
-                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i><li class="li-points-info">Each video game or movie that you approve will cost 100 points.
-                        </li></div>
+                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i>
+                            <li class="li-points-info">By reaching 500 points you will be granted the ability to
+                                suggest video games
+                                or movies to be added to the website.
+                            </li>
+                        </div>
+                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i>
+                            <li class="li-points-info">By reaching 5000 points you will be able to approve a
+                                suggested
+                                video game or movie!
+                            </li>
+                        </div>
+                        <div class="combine"><i class="fa-solid fa-diamond p-1"></i>
+                            <li class="li-points-info">Each video game or movie that you approve will cost 100
+                                points.
+                            </li>
+                        </div>
                     </ul>
+                    <div class="perm-btns-div">
+                        {% has_permission_to_suggest user as can_suggest %}
+                        {% if can_suggest %}
+                            <a class="perm-btn" href="#">Suggest a movie</a>
+                            <a class="perm-btn" href="#">Approve movies</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
