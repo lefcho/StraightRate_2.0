@@ -6,6 +6,7 @@ from django.views.generic import CreateView, UpdateView, DetailView
 
 from StraightRate_2.accounts.forms import RegisterForm, LoginForm, AppUserChangeForm
 from StraightRate_2.reviews.models import MovieReview, VideoGameReview
+from StraightRate_2.utils import calculate_user_points
 
 UserModel = get_user_model()
 
@@ -42,6 +43,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         context['movie_reviews'] = MovieReview.objects.filter(user=self.request.user)
         context['video_game_reviews'] = VideoGameReview.objects.filter(user=self.request.user)
         context['form'] = AppUserChangeForm(instance=self.request.user)
+        context['user_points'] = calculate_user_points(self.request.user)
         return context
 
 
