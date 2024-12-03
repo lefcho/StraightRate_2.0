@@ -52,7 +52,7 @@
     color: rgba(127, 255, 0, 0.8);
 }
 
-.points-info{
+.points-info {
     font-size: 1.4em;
     margin: 0 auto;
     width: 60%;
@@ -120,4 +120,28 @@
     padding-right: 0.3em;
     display: inline;
     color: #d1a858;
+}
+
+.light-btn {
+    text-transform: uppercase;
+    padding: 0.4em;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: all .5s ease;
+    color: rgb(7, 215, 238);
+    border: 3px solid rgb(7, 215, 238);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.888);
+}
+
+.light-btn:hover {
+    color: rgba(0, 0, 0, 0.888);
+    background-color: rgb(7, 215, 238);
+}
+
+.perm-btns-div {
+    font-family: "Roboto Condensed", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
