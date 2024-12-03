@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load approve_permission_tag %}
 {% load suggest_permission_tag %}
 {% block content %}
 {% load static %}
@@ -55,7 +56,10 @@
                         {% has_permission_to_suggest user as can_suggest %}
                         {% if can_suggest %}
                             <a class="perm-btn" href="#">Suggest a movie</a>
-                            <a class="perm-btn" href="#">Approve movies</a>
+                            {% has_permission_to_approve user as can_approve %}
+                            {% if can_approve %}
+                                <a class="perm-btn" href="#">Approve movies</a>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>

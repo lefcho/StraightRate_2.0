@@ -2,8 +2,11 @@ from django.contrib.auth.models import Group
 from django.db.models import Count
 from StraightRate_2.reviews.models import MovieReview, VideoGameReview
 
-PROPOSER_POINTS = 500
-REDACTOR_POINTS = 5000
+PROPOSER_POINTS = 10
+REDACTOR_POINTS = 20
+
+LIKE_REWARD_POINTS = 10
+REVIEW_REWARD_POINTS = 5
 
 
 def update_user_groups(user):
@@ -28,11 +31,11 @@ def calculate_user_points(user):
     movie_reviews_count = MovieReview.objects.filter(user=user).count()
     game_reviews_count = VideoGameReview.objects.filter(user=user).count()
 
-    review_points = (game_reviews_count + movie_reviews_count) * 5
+    review_points = (game_reviews_count + movie_reviews_count) * REVIEW_REWARD_POINTS
 
     like_points = movie_reviews.aggregate(total_likes=Count('likes'))['total_likes'] or 0
     like_points += game_reviews.aggregate(total_likes=Count('likes'))['total_likes'] or 0
-    like_points *= 10
+    like_points *= LIKE_REWARD_POINTS
 
     total_points = review_points + like_points
 
