@@ -6,6 +6,16 @@ class DirectorBaseForm(forms.ModelForm):
     class Meta:
         model = Director
         fields = '__all__'
+        widgets = {
+            'first_name': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'First name'}),
+            'last_name': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Last name'}),
+        }
+        labels = {
+            'first_name': '',
+            'last_name': '',
+        }
 
 
 class DeveloperBaseForm(forms.ModelForm):

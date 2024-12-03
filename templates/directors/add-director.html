@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% block content %}
+    <div class="form-wrapper">
+        <div class="form-title-cont">
+            <h2>Add a director</h2>
+        </div>
+        <form class="suggest-form" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <div class="wrapper-in-btn">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
