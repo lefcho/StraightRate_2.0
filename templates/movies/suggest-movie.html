@@ -1,0 +1,19 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="form-wrapper">
+        <div class="form-title-cont">
+            <h2>Suggest a movie</h2>
+            <p>Don't see your director?
+                <a href="#">Add him!</a>
+            </p>
+        </div>
+        <form class="suggest-form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <div class="wrapper-in-btn">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

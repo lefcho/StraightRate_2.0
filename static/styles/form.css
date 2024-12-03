@@ -1,3 +1,23 @@
+.suggest-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #d1a858;
+    gap: 1.5em;
+    padding: 3em;
+    padding-bottom: 2em;
+    background-color: rgba(0, 0, 0, 0.888);
+    max-width: 35%;
+    border-radius: 20px;
+    -webkit-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    -moz-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+
+    label {
+        font-size: 1.3em;
+    }
+}
+
 form.edited {
     display: flex;
     flex-direction: column;
@@ -8,9 +28,9 @@ form.edited {
     background-color: rgba(0, 0, 0, 0.888);
     max-width: 35%;
     border-radius: 20px;
-    -webkit-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
-    -moz-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
-    box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    -webkit-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    -moz-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
 }
 
 .form-control {
@@ -39,7 +59,7 @@ form .btn {
     background-color: rgba(0, 0, 0, 0.888);
 }
 
-form .btn:hover , form .btn:focus{
+form .btn:hover, form .btn:focus {
     color: rgba(0, 0, 0, 0.888);
     background-color: rgb(120, 230, 77);
 }
@@ -68,7 +88,7 @@ form li {
 
 }
 
-.form-title-cont p{
+.form-title-cont p {
     font-size: 1.2em;
 }
 

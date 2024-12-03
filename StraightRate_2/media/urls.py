@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import MovieRetrieveAPIView
+
+from StraightRate_2.media import views
 
 urlpatterns = [
-    path('movies/<int:pk>/', MovieRetrieveAPIView.as_view(), name='details-movie'),
+    path('movies/<int:pk>/', views.MovieRetrieveAPIView.as_view(), name='details-movie'),
+    path('suggest-movie/', views.MovieCreateView.as_view(), name='suggest-movie'),
 ]
