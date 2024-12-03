@@ -57,7 +57,7 @@
                             {% if can_suggest %}
                                 <div class="suggest-btns">
                                     <a class="perm-btn light-btn" href="{% url 'suggest-movie' %}">Suggest a movie</a>
-                                    <a class="perm-btn light-btn" href="#">Suggest a video game</a>
+                                    <a class="perm-btn light-btn" href="{% url 'suggest-game' %}">Suggest a video game</a>
                                 </div>
                                 {% has_permission_to_approve user as can_approve %}
                                 {% if can_approve %}

@@ -22,6 +22,16 @@ class DeveloperBaseForm(forms.ModelForm):
     class Meta:
         model = Developer
         fields = '__all__'
+        widgets = {
+            'developer_name': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Developer Name'}),
+            'website': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Website(optional)'}),
+        }
+        labels = {
+            'developer_name': '',
+            'website': '',
+        }
 
 
 class DirectorCreateForm(DirectorBaseForm):

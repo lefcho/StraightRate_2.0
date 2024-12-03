@@ -16,3 +16,4 @@ class AddDeveloperView(LoginRequiredMixin, CreateView):
     model = Developer
     form_class = DeveloperCreateForm
     template_name = 'developers/add-developer.html'
+    success_url = reverse_lazy('suggest-game')

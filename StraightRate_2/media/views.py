@@ -4,7 +4,7 @@ from django.views.generic import CreateView
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import AllowAny
 
-from StraightRate_2.media.forms import MovieCreateForm
+from StraightRate_2.media.forms import MovieCreateForm, VideoGameCreateForm
 from StraightRate_2.media.models import Movie, VideoGame
 from StraightRate_2.media.serializers import MovieSerializer
 
@@ -19,9 +19,15 @@ class MovieCreateView(LoginRequiredMixin, CreateView):
     template_name = 'movies/suggest-movie.html'
     form_class = MovieCreateForm
     model = Movie
+    success_url = reverse_lazy('view-profile')
 
-    def get_success_url(self):
-        return reverse_lazy('view-profile')
+
+class VideoGameCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'video-games/suggest-video-game.html'
+    form_class = VideoGameCreateForm
+    model = VideoGame
+    success_url = reverse_lazy('view-profile')
+
 
 # class MovieDetailView(DetailView):
 #     model = Movie
