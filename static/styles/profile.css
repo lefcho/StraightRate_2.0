@@ -55,7 +55,7 @@
 .points-info {
     font-size: 1.4em;
     margin: 0 auto;
-    width: 60%;
+    width: 100%;
     display: flex;
     gap: 1em;
     flex-direction: column;
@@ -73,6 +73,7 @@
 }
 
 .points-ul {
+    width: 65%;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -127,6 +128,7 @@
     padding: 0.4em;
     font-size: 1.2em;
     font-weight: bold;
+    text-align: center;
     transition: all .5s ease;
     color: rgb(7, 215, 238);
     border: 3px solid rgb(7, 215, 238);
@@ -142,6 +144,18 @@
 .perm-btns-div {
     font-family: "Roboto Condensed", sans-serif;
     display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+}
+
+.suggest-btns {
+    display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.3em;
+}
+
+.approve-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
 }
