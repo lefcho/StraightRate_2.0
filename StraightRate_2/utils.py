@@ -7,8 +7,8 @@ REDACTOR_POINTS = 5000
 
 
 def update_user_groups(user):
-    proposer_group, _ = Group.objects.get(name="Proposer")
-    redactor_group, _ = Group.objects.get(name="Redactor")
+    proposer_group = Group.objects.get(name="Proposer")
+    redactor_group = Group.objects.get(name="Redactor")
 
     if user.points >= REDACTOR_POINTS:
         user.groups.add(redactor_group, proposer_group)
