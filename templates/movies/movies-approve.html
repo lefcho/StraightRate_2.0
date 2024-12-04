@@ -3,32 +3,51 @@
 {% block content %}
     <div class="approve-list">
         {% for movie in movies %}
-            <div class="unapproved-movie">
-                <div class="unapproved-poster-div">
-                    <img src="{{ movie.poster.url }}" alt="{{ movies.title }} poster">
+            <div class="details">
+                <div class="image-container">
+                    <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
                 </div>
-                <h2>{{ movie.title }}</h2>
-                <div class="unapproved-info-div">
-                    <h5 class="small-info">Released:</h5>
-                    <p class="info">{{ movie.release_date }}</p>
+                <div class="info-cont">
+                    <div class="big-info-cont">
+                        <div class="title-cont">
+                            <h1 class="big-title">{{ movie.title }}</h1>
+                            <div>
+                                <a class="approve-btn" href="#">Approve</a>
+                            </div>
+                        </div>
 
-                    <p class="seperator"> | </p>
-                    <h5 class="small-info">Genre/s:</h5>
-                    {% for genre in movie.genres.all %}
-                        <p>{{ genre }}</p>
-                    {% endfor %}
-                    <h5 class="small-info">Director/s:</h5>
-                    {% for director in movie.directors.all %}
-                        <p>{{ director }}</p>
-                    {% endfor %}
-                    <p class="description">
-                        {{ movie.description }}
-                    </p>
+                        <div class="small-info-cont-ua">
+                            <div class="title-and-info">
+                                <p class="small-info">Released:</p>
+                                <h5 class="info">{{ movie.release_date }}</h5>
+                            </div>
+                            <div class="title-and-info">
+                                <p class="small-info">Genre:</p>
+                                {% for genre in movie.genres.all %}
+                                    <a href="#">
+                                        <h5 class="info underline">{{ genre }}</h5>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="title-and-info">
+                                <p class="small-info">Director:</p>
+                                {% for director in movie.directors.all %}
+                                    <a href="#">
+                                        <h5 class="info underline">{{ director }}</h5>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <p class="description">
+                            {{ movie.description }}
+                        </p>
+                    </div>
                 </div>
             </div>
         {% endfor %}
     </div>
-
+<div class="pagination-div">
     {% if not page_obj.has_next and page_obj.number == 1 %}
         <p>That's the only page</p>
     {% else %}
@@ -50,4 +69,5 @@
         </span>
         </div>
     {% endif %}
+</div>
 {% endblock %}

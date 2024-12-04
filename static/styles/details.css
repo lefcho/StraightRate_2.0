@@ -1,10 +1,11 @@
 .details {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-content: center;
     background-color: rgba(0, 0, 0, 0.888);
-    max-width: 100%;
+    min-width: 800px;
+    max-width: 60%;
     padding: 2em;
     margin: 2em auto auto;
     border-radius: 10px;
@@ -26,7 +27,6 @@
     flex-direction: column;
     justify-content: center;
     padding: 2em;
-    margin: 2em auto auto;
     border-radius: 10px;
 }
 
@@ -57,7 +57,7 @@
     border: 3px solid rgb(120, 230, 77);
 }
 
-.leave-review-cont a:hover, .btn-three:hover {
+.leave-review-cont a:hover, .btn-three:hover{
     color: rgb(120, 230, 77);
     background-color: rgb(0, 0, 0);
 }
@@ -75,7 +75,7 @@
 .big-info-cont {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     padding: 1em 2em;
     gap: 1em;
 }
@@ -94,14 +94,15 @@
     padding: 1em 0;
 }
 
-.small-info-cont p {
+.info-cont {
+    width: 100%;
+}
+
+.small-info {
     font-weight: bold;
     margin: 0;
     font-size: 1.5em;
     color: #c45858;
-}
-
-.small-info {
     padding-right: 0.2em;
     display: flex;
     flex-wrap: wrap;
@@ -136,6 +137,13 @@
     padding: 10px;
 }
 
+.title-and-info {
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    gap: 1em;
+}
+
 #title-review {
     font-size: 2.7em;
     text-align: center;
@@ -146,6 +154,24 @@
     margin: auto;
     max-width: 70%;
 }
+
+.approve-btn {
+    text-transform: uppercase;
+    padding: 0.3em;
+    font-size: 1.3em;
+    font-weight: bold;
+    transition: all .5s ease;
+    color: rgb(120, 230, 77);
+    border: 3px solid rgb(120, 230, 77);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.888);
+}
+
+.approve-btn:hover, .approve-btn:focus {
+    color: rgba(0, 0, 0, 0.888);
+    background-color: rgb(120, 230, 77);
+}
+
 
 .review-form {
     max-width: 700px;
