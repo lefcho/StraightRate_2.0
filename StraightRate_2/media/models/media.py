@@ -25,6 +25,10 @@ class AbstractMedia(models.Model):
         default=False,
     )
 
+    date_added = models.DateField(
+        auto_now_add=True,
+    )
+
     def get_average_rating(self):
         avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
         return round(avg_rating, 1) if avg_rating is not None else None

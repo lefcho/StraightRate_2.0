@@ -36,7 +36,7 @@ class MovieApproveView(LoginRequiredMixin, ListView):
     model = Movie
 
     def get_queryset(self):
-        return self.model.objects.filter(approved=False)
+        return self.model.objects.filter(approved=False).order_by('-date_added')
 
 
 class VideoGamesApproveView(LoginRequiredMixin, ListView):

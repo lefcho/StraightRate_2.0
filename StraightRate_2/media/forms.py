@@ -5,7 +5,7 @@ from StraightRate_2.media.models import Movie, VideoGame
 class MovieBaseForm(forms.ModelForm):
     class Meta:
         model = Movie
-        exclude = ['approved']
+        exclude = ['approved', 'date_added']
         widgets = {
             'title': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': 'Enter movie title'}),
@@ -20,7 +20,7 @@ class MovieBaseForm(forms.ModelForm):
 class VideoGameBaseForm(forms.ModelForm):
     class Meta:
         model = VideoGame
-        exclude = ['approved']
+        exclude = ['approved', 'date_added']
         widgets = {
             'title': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': 'Enter video game title'}),
