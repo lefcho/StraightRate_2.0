@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import AllowAny
 
@@ -27,6 +27,20 @@ class VideoGameCreateView(LoginRequiredMixin, CreateView):
     form_class = VideoGameCreateForm
     model = VideoGame
     success_url = reverse_lazy('view-profile')
+
+
+class MovieApproveView(LoginRequiredMixin, ListView):
+    template_name = 'movies/movies-approve.html'
+    context_object_name = 'movies'
+    paginate_by = 2
+    model = Movie
+
+    def get_queryset(self):
+        return self.model.objects.filter(approved=False)
+
+
+class VideoGamesApproveView(LoginRequiredMixin, ListView):
+    pass
 
 
 # class MovieDetailView(DetailView):

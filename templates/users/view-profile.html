@@ -46,11 +46,6 @@
                                     video game or movie!
                                 </li>
                             </div>
-                            <div class="combine"><i class="fa-solid fa-diamond p-1"></i>
-                                <li class="li-points-info">Each video game or movie that you approve will cost 100
-                                    points.
-                                </li>
-                            </div>
                         </ul>
                         <div class="perm-btns-div">
                             {% has_permission_to_suggest user as can_suggest %}
@@ -62,7 +57,7 @@
                                 {% has_permission_to_approve user as can_approve %}
                                 {% if can_approve %}
                                     <div class="approve-btns">
-                                        <a class="perm-btn light-btn" href="#">Approve movies</a>
+                                        <a class="perm-btn light-btn" href="{% url 'approve-movies' %}">Approve movies</a>
                                         <a class="perm-btn light-btn" href="#">Approve video games</a>
                                     </div>
                                 {% endif %}

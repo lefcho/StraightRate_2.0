@@ -1,0 +1,53 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="approve-list">
+        {% for movie in movies %}
+            <div class="unapproved-movie">
+                <div class="unapproved-poster-div">
+                    <img src="{{ movie.poster.url }}" alt="{{ movies.title }} poster">
+                </div>
+                <h2>{{ movie.title }}</h2>
+                <div class="unapproved-info-div">
+                    <h5 class="small-info">Released:</h5>
+                    <p class="info">{{ movie.release_date }}</p>
+
+                    <p class="seperator"> | </p>
+                    <h5 class="small-info">Genre/s:</h5>
+                    {% for genre in movie.genres.all %}
+                        <p>{{ genre }}</p>
+                    {% endfor %}
+                    <h5 class="small-info">Director/s:</h5>
+                    {% for director in movie.directors.all %}
+                        <p>{{ director }}</p>
+                    {% endfor %}
+                    <p class="description">
+                        {{ movie.description }}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if not page_obj.has_next and page_obj.number == 1 %}
+        <p>That's the only page</p>
+    {% else %}
+        <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+        </div>
+    {% endif %}
+{% endblock %}
