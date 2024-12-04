@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
 from rest_framework.generics import RetrieveAPIView
@@ -29,7 +31,7 @@ class VideoGameCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('view-profile')
 
 
-class MovieApproveView(LoginRequiredMixin, ListView):
+class MovieListApproveView(LoginRequiredMixin, ListView):
     template_name = 'movies/movies-approve.html'
     context_object_name = 'movies'
     paginate_by = 2
@@ -39,7 +41,7 @@ class MovieApproveView(LoginRequiredMixin, ListView):
         return self.model.objects.filter(approved=False).order_by('-date_added')
 
 
-class VideoGamesApproveView(LoginRequiredMixin, ListView):
+class VideoGamesListApproveView(LoginRequiredMixin, ListView):
     template_name = 'video-games/video-game-approve.html'
     context_object_name = 'games'
     paginate_by = 1
@@ -47,6 +49,24 @@ class VideoGamesApproveView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return self.model.objects.filter(approved=False).order_by('-date_added')
+
+
+@login_required
+def approve_movie(request, pk):
+    movie = Movie.objects.get(pk=pk)
+    movie.approved = True
+    movie.save()
+
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
+def approve_game(request, pk):
+    game = VideoGame.objects.get(pk=pk)
+    game.approved = True
+    game.save()
+
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 # class MovieDetailView(DetailView):

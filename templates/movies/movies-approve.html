@@ -12,7 +12,7 @@
                         <div class="title-cont">
                             <h1 class="big-title">{{ movie.title }}</h1>
                             <div>
-                                <a class="approve-btn" href="#">Approve</a>
+                                <a class="approve-btn" href="{% url 'approve-movie' movie.pk %}">Approve</a>
                             </div>
                         </div>
 
@@ -30,7 +30,7 @@
                                 {% endfor %}
                             </div>
                             <div class="title-and-info">
-                                <p class="small-info">Director:</p>
+                                <p class="small-info">Director/s:</p>
                                 {% for director in movie.directors.all %}
                                     <a href="#">
                                         <h5 class="info underline">{{ director }}</h5>
@@ -47,6 +47,7 @@
             </div>
         {% endfor %}
     </div>
+    
 <div class="pagination-div">
     {% if not page_obj.has_next and page_obj.number == 1 %}
         <p>That's the only page for now</p>

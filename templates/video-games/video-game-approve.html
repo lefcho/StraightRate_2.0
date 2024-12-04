@@ -12,7 +12,7 @@
                         <div class="title-cont">
                             <h1 class="big-title">{{ game.title }}</h1>
                             <div>
-                                <a class="approve-btn" href="#">Approve</a>
+                                <a class="approve-btn" href="{% url 'approve-game' game.pk %}">Approve</a>
                             </div>
                         </div>
 
@@ -45,6 +45,7 @@
             </div>
         {% endfor %}
     </div>
+    
 <div class="pagination-div">
     {% if not page_obj.has_next and page_obj.number == 1 %}
         <p>That's the only page for now</p>
