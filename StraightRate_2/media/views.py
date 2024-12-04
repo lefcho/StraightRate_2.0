@@ -32,7 +32,7 @@ class VideoGameCreateView(LoginRequiredMixin, CreateView):
 class MovieApproveView(LoginRequiredMixin, ListView):
     template_name = 'movies/movies-approve.html'
     context_object_name = 'movies'
-    paginate_by = 1
+    paginate_by = 2
     model = Movie
 
     def get_queryset(self):
