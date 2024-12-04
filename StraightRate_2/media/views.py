@@ -40,7 +40,13 @@ class MovieApproveView(LoginRequiredMixin, ListView):
 
 
 class VideoGamesApproveView(LoginRequiredMixin, ListView):
-    pass
+    template_name = 'video-games/video-game-approve.html'
+    context_object_name = 'games'
+    paginate_by = 1
+    model = VideoGame
+
+    def get_queryset(self):
+        return self.model.objects.filter(approved=False).order_by('-date_added')
 
 
 # class MovieDetailView(DetailView):

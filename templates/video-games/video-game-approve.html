@@ -1,0 +1,73 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="approve-list">
+        {% for movie in movies %}
+            <div class="details">
+                <div class="image-container">
+                    <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+                </div>
+                <div class="info-cont">
+                    <div class="big-info-cont">
+                        <div class="title-cont">
+                            <h1 class="big-title">{{ movie.title }}</h1>
+                            <div>
+                                <a class="approve-btn" href="#">Approve</a>
+                            </div>
+                        </div>
+
+                        <div class="small-info-cont-ua">
+                            <div class="title-and-info">
+                                <p class="small-info">Released:</p>
+                                <h5 class="info">{{ movie.release_date }}</h5>
+                            </div>
+                            <div class="title-and-info">
+                                <p class="small-info">Genre:</p>
+                                {% for genre in movie.genres.all %}
+                                    <a href="#">
+                                        <h5 class="info underline">{{ genre }}</h5>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="title-and-info">
+                                <p class="small-info">Director:</p>
+                                {% for director in movie.directors.all %}
+                                    <a href="#">
+                                        <h5 class="info underline">{{ director }}</h5>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <p class="description">
+                            {{ movie.description }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+<div class="pagination-div">
+    {% if not page_obj.has_next and page_obj.number == 1 %}
+        <p>That's the only page for now</p>
+    {% else %}
+        <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class="pagination-btn" href="?page=1">&laquo; first</a>
+                <a class="pagination-btn" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a class="pagination-btn" href="?page={{ page_obj.next_page_number }}">next</a>
+                <a class="pagination-btn" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
