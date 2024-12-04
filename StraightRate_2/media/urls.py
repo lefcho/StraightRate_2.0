@@ -6,4 +6,5 @@ urlpatterns = [
     path('suggest-movie/', views.MovieCreateView.as_view(), name='suggest-movie'),
     path('suggest-video-game/', views.VideoGameCreateView.as_view(), name='suggest-game'),
     path('approve-movies/', views.MovieApproveView.as_view(), name='approve-movies'),
+    path('approve-video-games/', views.VideoGamesApproveView.as_view(), name='approve-games'),
 ]

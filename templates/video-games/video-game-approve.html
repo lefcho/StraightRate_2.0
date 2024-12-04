@@ -2,15 +2,15 @@
 
 {% block content %}
     <div class="approve-list">
-        {% for movie in movies %}
+        {% for game in games %}
             <div class="details">
                 <div class="image-container">
-                    <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+                    <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
                 </div>
                 <div class="info-cont">
                     <div class="big-info-cont">
                         <div class="title-cont">
-                            <h1 class="big-title">{{ movie.title }}</h1>
+                            <h1 class="big-title">{{ game.title }}</h1>
                             <div>
                                 <a class="approve-btn" href="#">Approve</a>
                             </div>
@@ -19,28 +19,26 @@
                         <div class="small-info-cont-ua">
                             <div class="title-and-info">
                                 <p class="small-info">Released:</p>
-                                <h5 class="info">{{ movie.release_date }}</h5>
+                                <h5 class="info">{{ game.release_date }}</h5>
                             </div>
                             <div class="title-and-info">
                                 <p class="small-info">Genre:</p>
-                                {% for genre in movie.genres.all %}
+                                {% for genre in game.genres.all %}
                                     <a href="#">
                                         <h5 class="info underline">{{ genre }}</h5>
                                     </a>
                                 {% endfor %}
                             </div>
                             <div class="title-and-info">
-                                <p class="small-info">Director:</p>
-                                {% for director in movie.directors.all %}
+                                <p class="small-info">Developer:</p>
                                     <a href="#">
-                                        <h5 class="info underline">{{ director }}</h5>
+                                        <h5 class="info underline">{{ game.developer }}</h5>
                                     </a>
-                                {% endfor %}
                             </div>
                         </div>
 
                         <p class="description">
-                            {{ movie.description }}
+                            {{ game.description }}
                         </p>
                     </div>
                 </div>
