@@ -73,6 +73,7 @@ class MovieByGenreView(ListView):
     model = Movie
     context_object_name = 'movies'
     template_name = 'movies/movies-by-genre.html'
+    paginate_by = 1
 
     def get_queryset(self):
         genre = self.kwargs['genre'].lower()
@@ -88,6 +89,7 @@ class VideoGameByGenreView(ListView):
     model = VideoGame
     context_object_name = 'games'
     template_name = 'video-games/video-games-by-genre.html'
+    paginate_by = 1
 
     def get_queryset(self):
         genre = self.kwargs['genre'].lower()
