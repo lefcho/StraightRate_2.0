@@ -69,6 +69,36 @@ def approve_game(request, pk):
     return redirect(request.META.get('HTTP_REFERER'))
 
 
+class MovieByGenreView(ListView):
+    model = Movie
+    context_object_name = 'movies'
+    template_name = 'movies/movies-by-genre.html'
+
+    def get_queryset(self):
+        genre = self.kwargs['genre'].lower()
+        return self.model.objects.filter(genres__genre_name__iexact=genre)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=None, **kwargs)
+        context['genre'] = self.kwargs['genre']
+        return context
+
+
+class VideoGameByGenreView(ListView):
+    model = VideoGame
+    context_object_name = 'games'
+    template_name = 'video-games/video-games-by-genre.html'
+
+    def get_queryset(self):
+        genre = self.kwargs['genre'].lower()
+        return self.model.objects.filter(genres__genre_name__iexact=genre)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=None, **kwargs)
+        context['genre'] = self.kwargs['genre']
+        return context
+
+
 # class MovieDetailView(DetailView):
 #     model = Movie
 #     template_name = 'movies/movie-details.html'

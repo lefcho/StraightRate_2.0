@@ -9,4 +9,7 @@ urlpatterns = [
     path('approve-list-video-games/', views.VideoGamesListApproveView.as_view(), name='approve-list-games'),
     path('approve-movies/<int:pk>/', views.approve_movie, name='approve-movie'),
     path('approve-video-game/<int:pk>/', views.approve_game, name='approve-game'),
+    path('movies/genre/<str:genre>/', views.MovieByGenreView.as_view(), name='movies-by-genre'),
+    path('video-games/genre/<str:genre>/', views.VideoGameByGenreView.as_view(), name='games-by-genre'),
+
 ]

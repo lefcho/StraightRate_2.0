@@ -1,0 +1,20 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<main>
+    <h2>{{ genre }} games</h2>
+    <div class="top-video-games">
+        {% for game in games %}
+            <a href="#">
+                <div class="game">
+                    <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
+                    <h3>{{ game.title }}</h3>
+                    <p>{{ game.get_average_rating }}<i class="fa-solid fa-star"></i></p>
+                </div>
+            </a>
+        {% empty %}
+            <p class="no-content-p">No {{ genre }} video games added yet!</p>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

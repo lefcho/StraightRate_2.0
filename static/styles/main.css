@@ -63,7 +63,7 @@ main h2 {
     width: 100%;
 }
 
-.no-content {
+.no-content, .no-content-p {
     color: rgb(120, 230, 77);
 }
 

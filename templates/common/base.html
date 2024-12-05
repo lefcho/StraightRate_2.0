@@ -22,8 +22,9 @@
                 <div class="dropdown-content">
                     {% movie_genres as m_genres %}
                     {% for genre in m_genres %}
-                        <a href="#">{{ genre.genre_name }}</a>
+                        <a href="{% url 'movies-by-genre' genre=genre.genre_name %}">{{ genre.genre_name }}</a>
                     {% endfor %}
+
                 </div>
             </li>
 
@@ -32,7 +33,7 @@
                 <div class="dropdown-content">
                     {% game_genres as g_genres %}
                     {% for genre in g_genres %}
-                        <a href="#">{{ genre.genre_name }}</a>
+                        <a href="{% url 'games-by-genre' genre=genre.genre_name %}">{{ genre.genre_name }}</a>
                     {% endfor %}
                 </div>
             </li>
