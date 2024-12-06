@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
@@ -17,31 +17,43 @@ class MovieRetrieveAPIView(RetrieveAPIView):
     permission_classes = [AllowAny]
 
 
-class MovieCreateView(LoginRequiredMixin, CreateView):
+class MovieCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'movies/suggest-movie.html'
     form_class = MovieCreateForm
     model = Movie
     success_url = reverse_lazy('view-profile')
+    permission_required = 'media.can_suggest_movies'
+
+    def handle_no_permission(self):
+        return redirect('home')
 
 
-class VideoGameCreateView(LoginRequiredMixin, CreateView):
+class VideoGameCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'video-games/suggest-video-game.html'
     form_class = VideoGameCreateForm
     model = VideoGame
     success_url = reverse_lazy('view-profile')
+    permission_required = 'media.can_suggest_games'
+
+    def handle_no_permission(self):
+        return redirect('home')
 
 
-class MovieListApproveView(LoginRequiredMixin, ListView):
+class MovieListApproveView(PermissionRequiredMixin, ListView):
     template_name = 'movies/movies-approve.html'
     context_object_name = 'movies'
     paginate_by = 2
     model = Movie
+    permission_required = 'media.can_approve_movies'
 
     def get_queryset(self):
         return self.model.objects.filter(approved=False).order_by('-date_added')
 
+    def handle_no_permission(self):
+        return redirect('home')
 
-class VideoGamesListApproveView(LoginRequiredMixin, ListView):
+
+class VideoGamesListApproveView(PermissionRequiredMixin, ListView):
     template_name = 'video-games/video-game-approve.html'
     context_object_name = 'games'
     paginate_by = 1
