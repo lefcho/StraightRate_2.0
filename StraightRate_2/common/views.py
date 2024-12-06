@@ -43,6 +43,9 @@ class SearchedMediaView(TemplateView):
             movie_results = Movie.objects.filter(title__icontains=query)
             game_results = VideoGame.objects.filter(title__icontains=query)
 
+        movie_results.filter(approved=True)
+        game_results.filter(approved=True)
+
         context.update({
             'query': query,
             'movie_results': movie_results,
