@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -68,21 +68,23 @@ class VideoGamesListApproveView(PermissionRequiredMixin, ListView):
 
 
 @login_required
+@permission_required('media.can_approve_movies', login_url='home')
 def approve_movie(request, pk):
     movie = Movie.objects.get(pk=pk)
     movie.approved = True
     movie.save()
 
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('approve-list-movies')
 
 
 @login_required
+@permission_required('media.can_approve_games', login_url='home')
 def approve_game(request, pk):
     game = VideoGame.objects.get(pk=pk)
     game.approved = True
     game.save()
 
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('approve-list-games')
 
 
 class MovieByGenreView(ListView):
