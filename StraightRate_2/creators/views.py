@@ -33,8 +33,18 @@ class DirectorDetailView(DetailView):
     template_name = 'directors/director-details.html'
     context_object_name = 'director'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['movies'] = self.object.movies.filter(approved=True)
+        return context
+
 
 class DeveloperDetailView(DetailView):
     model = Developer
     template_name = 'developers/developer-details.html'
     context_object_name = 'developer'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['games'] = self.object.games.filter(approved=True)
+        return context

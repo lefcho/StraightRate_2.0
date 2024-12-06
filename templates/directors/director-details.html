@@ -3,7 +3,7 @@
 
 {% block content %}
     <main>
-        <h2>Movies by {{ director.first_name }} {{ director.last_name }}</h2>
+        <h2>Movies by {{ director }}</h2>
         <div class="movies">
             {% for movie in movies %}
                 <a href="{% url 'details-movie' movie.id %}">
@@ -13,6 +13,8 @@
                         <p>{{ movie.average_rating }}<i class="fa-solid fa-star"></i></p>
                     </div>
                 </a>
+                {% empty %}
+                <p class="no-content">No movies from {{ director }} added yet.</p>
             {% endfor %}
         </div>
     </main>

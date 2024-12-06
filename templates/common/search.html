@@ -52,7 +52,7 @@
                 <ul>
                     {% for director in directors %}
                         <li>
-                            <a href="#" class="underline">
+                            <a href="{% url 'director-details' director.pk %}" class="underline">
                                 {{ director.full_name }}
                             </a>
                         </li>
@@ -67,7 +67,7 @@
                 <ul>
                     {% for developer in developers %}
                         <li>
-                            <a href="#" class="underline">
+                            <a href="{% url 'developer-details' developer.pk %}" class="underline">
                                 {{ developer.developer_name }}
                             </a>
                         </li>
