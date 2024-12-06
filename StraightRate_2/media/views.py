@@ -58,9 +58,13 @@ class VideoGamesListApproveView(PermissionRequiredMixin, ListView):
     context_object_name = 'games'
     paginate_by = 1
     model = VideoGame
+    permission_required = 'media.can_approve_games'
 
     def get_queryset(self):
         return self.model.objects.filter(approved=False).order_by('-date_added')
+
+    def handle_no_permission(self):
+        return redirect('home')
 
 
 @login_required
