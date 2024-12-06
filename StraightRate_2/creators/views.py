@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from StraightRate_2.creators.forms import DirectorCreateForm, DeveloperCreateForm
 from StraightRate_2.creators.models import Director, Developer
 
@@ -26,3 +26,15 @@ class AddDeveloperView(PermissionRequiredMixin, CreateView):
 
     def handle_no_permission(self):
         return redirect('home')
+
+
+class DirectorDetailView(DetailView):
+    model = Director
+    template_name = 'directors/director-details.html'
+    context_object_name = 'director'
+
+
+class DeveloperDetailView(DetailView):
+    model = Developer
+    template_name = 'developers/developer-details.html'
+    context_object_name = 'developer'
