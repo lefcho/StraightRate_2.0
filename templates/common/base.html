@@ -39,11 +39,11 @@
             </li>
         </ul>
     </div>
-    <form method="GET">
+    <form method="GET" action="{% url 'search' %}">
         <div class="flexbox">
             <div class="search">
                 <div>
-                    <input class="search-input" type="text" name="q" placeholder="Search . . ." required>
+                    <input class="search-input" type="text" name="query" placeholder="Search . . ." required>
                     <button class="circle" type="submit"></button>
                 </div>
             </div>
