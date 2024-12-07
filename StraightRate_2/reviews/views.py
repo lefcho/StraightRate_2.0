@@ -21,12 +21,6 @@ class MovieReviewListCreateView(ListCreateAPIView):
             raise ValidationError({"error": "Movie ID is required"})
         return MovieReview.objects.filter(movie_id=movie_id)
 
-    def perform_create(self, serializer):
-
-        movie_id = self.kwargs.get('movie_id')
-        movie = get_object_or_404(Movie, pk=movie_id)
-        serializer.save(user=self.request.user, movie=movie)
-
 
 # Retrieve, Update, Delete a Movie Review
 class MovieReviewDetailView(RetrieveUpdateDestroyAPIView):
