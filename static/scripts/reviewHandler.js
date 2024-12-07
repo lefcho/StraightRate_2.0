@@ -5,12 +5,15 @@ const userReviewContainer = document.getElementById('user-review-container');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Fetch CSRF token for POST requests
-    const headers = {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken'),
-    };
 
+    if (userAuthenticated) {
+        createReviewForm();
+    }
+
+});
+
+
+function handleReviewFormSubmission(event) {
     function getCookie(name) {
         const cookies = document.cookie.split(';');
         for (const cookie of cookies) {
@@ -20,49 +23,45 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    if (userAuthenticated) {
-        createReviewForm();
-    }
-});
+    event.preventDefault();
 
+    const ratingValue = document.getElementById('rating-value').value;
+    const comment = document.getElementById('review-comment').value;
 
-function initStarRating() {
-    const stars = document.querySelectorAll('.star');
-    const ratingValue = document.getElementById('rating-value');
+    const reviewData = {
+        rating: ratingValue,
+        comment: comment,
+        movie: movieId,
+    };
 
-    // Set initial stars based on current rating
-    highlightStars(ratingValue.value);
-
-    stars.forEach(star => {
-        star.addEventListener('mouseover', function () {
-            resetStars(); // Reset all stars before highlighting
-            highlightStars(this.getAttribute('data-value')); // Highlight stars based on hover
+    // Submit the form via fetch
+    fetch(`/reviews/movies/${movieId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify(reviewData),
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to submit review');
+            }
+        })
+        .then(data => {
+            // Handle successful submission (e.g., clear the form, show a success message)
+            console.log('Review submitted successfully:', data);
+            createReviewForm(); // Reset the form after submission
+            alert('Your review has been submitted!');
+        })
+        .catch(error => {
+            console.error('Error submitting review:', error);
+            alert('There was an error submitting your review.');
         });
-
-        star.addEventListener('mouseout', function () {
-            resetStars(); // Reset stars when not hovering
-            highlightStars(ratingValue.value); // Highlight stars based on selected value
-        });
-
-        // Handle click event (locking in rating)
-        star.addEventListener('click', function () {
-            ratingValue.value = this.getAttribute('data-value'); // Set rating value
-            highlightStars(ratingValue.value); // Highlight based on clicked value
-        });
-    });
-
-    // Function to reset all stars to default (unfilled)
-    function resetStars() {
-        stars.forEach(star => star.classList.remove('filled'));
-    }
-
-    // Function to highlight stars up to the specified value
-    function highlightStars(rating) {
-        for (let i = 0; i < rating; i++) {
-            stars[i].classList.add('filled');
-        }
-    }
 }
+
 
 function createReviewForm(review = null) {
     // Create form element
@@ -110,10 +109,11 @@ function createReviewForm(review = null) {
     submitButton.textContent = review ? 'Update Review' : 'Submit Review';
     reviewForm.appendChild(submitButton);
 
+    // Attach the submit event handler
+    reviewForm.addEventListener('submit', handleReviewFormSubmission);
+
     // Append the review form to the user review container
     userReviewContainer.innerHTML = ''; // Clear any existing content
     userReviewContainer.appendChild(reviewForm);
 
-    // Initialize star rating logic
-    initStarRating();
 }
