@@ -1,16 +1,16 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const movieId = {{ movie.id }}; // Assume this is passed in context
-    const apiBaseUrl = '/api/';
-    const userReviewContainer = document.getElementById('user-review-container');
-    const reviewsContainer = document.getElementById('reviews-container');
-    const averageRatingEl = document.getElementById('average-rating');
+const movieDetails = document.getElementById('movie-details');
+const movieId = movieDetails.dataset.movieId;
+const userAuthenticated = movieDetails.dataset.userAuth === "true"; // Boolean conversion
+const userReviewContainer = document.getElementById('user-review-container');
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Fetch CSRF token for POST requests
     const headers = {
         'Content-Type': 'application/json',
         'X-CSRFToken': getCookie('csrftoken'),
     };
 
-    // Helper to get CSRF token
     function getCookie(name) {
         const cookies = document.cookie.split(';');
         for (const cookie of cookies) {
@@ -20,131 +20,100 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    // Fetch and render reviews
-    async function fetchReviews() {
-        try {
-            const response = await fetch(`${apiBaseUrl}reviews/?movie_id=${movieId}`);
-            const data = await response.json();
-            reviewsContainer.innerHTML = '';
-            let totalRating = 0;
-
-            data.forEach(review => {
-                const reviewDiv = document.createElement('div');
-                reviewDiv.classList.add('review');
-
-                reviewDiv.innerHTML = `
-                    <h3 class="review-username">${review.user.username}</h3>
-                    <p class="review-rating">Rating: ${review.rating} <i class="fa-solid fa-star"></i></p>
-                    <p class="review-comment">${review.comment}</p>
-                    <button class="like-btn" data-id="${review.id}">
-                        Like (${review.like_count})
-                    </button>
-                `;
-
-                reviewsContainer.appendChild(reviewDiv);
-                totalRating += review.rating;
-            });
-
-            // Update average rating
-            const averageRating = data.length ? (totalRating / data.length).toFixed(1) : 'Not reviewed yet.';
-            averageRatingEl.textContent = averageRating;
-
-            // Attach like handlers
-            attachLikeHandlers();
-        } catch (error) {
-            console.error('Error fetching reviews:', error);
-        }
+    if (userAuthenticated) {
+        createReviewForm();
     }
-
-    // Handle like toggling
-    async function toggleLike(reviewId) {
-        try {
-            const response = await fetch(`${apiBaseUrl}reviews/${reviewId}/like/`, {
-                method: 'POST',
-                headers,
-            });
-
-            const data = await response.json();
-            fetchReviews(); // Re-fetch reviews to update UI
-        } catch (error) {
-            console.error('Error toggling like:', error);
-        }
-    }
-
-    // Attach click handlers for like buttons
-    function attachLikeHandlers() {
-        const likeButtons = document.querySelectorAll('.like-btn');
-        likeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const reviewId = button.dataset.id;
-                toggleLike(reviewId);
-            });
-        });
-    }
-
-    // Handle creating/updating user review
-    async function saveUserReview(reviewId = null, rating, comment) {
-        try {
-            const method = reviewId ? 'PUT' : 'POST';
-            const url = reviewId
-                ? `${apiBaseUrl}reviews/${reviewId}/`
-                : `${apiBaseUrl}reviews/`;
-
-            const response = await fetch(url, {
-                method,
-                headers,
-                body: JSON.stringify({
-                    movie: movieId,
-                    rating,
-                    comment,
-                }),
-            });
-
-            if (response.ok) {
-                fetchReviews();
-            } else {
-                console.error('Error saving review:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error saving review:', error);
-        }
-    }
-
-    // Render user's review form
-    async function renderUserReview() {
-        // Fetch the user's review if exists
-        try {
-            const response = await fetch(`${apiBaseUrl}reviews/?movie_id=${movieId}`);
-            const data = await response.json();
-            const userReview = data.find(review => review.user.id === currentUser.id);
-
-            userReviewContainer.innerHTML = `
-                <form id="user-review-form">
-                    <div class="star-rating">
-                        <label for="rating">Rating:</label>
-                        <input type="number" id="rating" name="rating" value="${userReview ? userReview.rating : ''}" required min="1" max="5">
-                    </div>
-                    <textarea id="comment" name="comment" placeholder="Write your review..." required>
-                        ${userReview ? userReview.comment : ''}
-                    </textarea>
-                    <button type="submit" class="btn btn-primary">${userReview ? 'Update' : 'Submit'} Review</button>
-                </form>
-            `;
-
-            // Attach form submit handler
-            const reviewForm = document.getElementById('user-review-form');
-            reviewForm.addEventListener('submit', async event => {
-                event.preventDefault();
-                const rating = document.getElementById('rating').value;
-                const comment = document.getElementById('comment').value;
-                await saveUserReview(userReview?.id, rating, comment);
-            });
-        } catch (error) {
-            console.error('Error rendering user review:', error);
-        }
-    }
-
-    // Initialize
-    fetchReviews();
-    renderUserReview();
 });
+
+
+function initStarRating() {
+    const stars = document.querySelectorAll('.star');
+    const ratingValue = document.getElementById('rating-value');
+
+    // Set initial stars based on current rating
+    highlightStars(ratingValue.value);
+
+    stars.forEach(star => {
+        star.addEventListener('mouseover', function () {
+            resetStars(); // Reset all stars before highlighting
+            highlightStars(this.getAttribute('data-value')); // Highlight stars based on hover
+        });
+
+        star.addEventListener('mouseout', function () {
+            resetStars(); // Reset stars when not hovering
+            highlightStars(ratingValue.value); // Highlight stars based on selected value
+        });
+
+        // Handle click event (locking in rating)
+        star.addEventListener('click', function () {
+            ratingValue.value = this.getAttribute('data-value'); // Set rating value
+            highlightStars(ratingValue.value); // Highlight based on clicked value
+        });
+    });
+
+    // Function to reset all stars to default (unfilled)
+    function resetStars() {
+        stars.forEach(star => star.classList.remove('filled'));
+    }
+
+    // Function to highlight stars up to the specified value
+    function highlightStars(rating) {
+        for (let i = 0; i < rating; i++) {
+            stars[i].classList.add('filled');
+        }
+    }
+}
+
+function createReviewForm(review = null) {
+    // Create form element
+    const reviewForm = document.createElement('form');
+    reviewForm.classList.add('review-form');
+    reviewForm.id = 'user-review-form';
+
+    // Create the star-rating container
+    const starRatingDiv = document.createElement('div');
+    starRatingDiv.classList.add('star-rating');
+
+    // Create the hidden input for rating
+    const ratingInput = document.createElement('input');
+    ratingInput.type = 'hidden';
+    ratingInput.name = 'rating';
+    ratingInput.id = 'rating-value';
+    ratingInput.value = review ? review.rating : 0;  // Set value if review exists
+
+    // Create star icons dynamically
+    for (let i = 1; i <= 5; i++) {
+        const starIcon = document.createElement('i');
+        starIcon.classList.add('fa', 'fa-star', 'star');
+        starIcon.dataset.value = i;
+        starRatingDiv.appendChild(starIcon);
+    }
+
+    // Append rating input and star rating div to the form
+    reviewForm.appendChild(ratingInput);
+    reviewForm.appendChild(starRatingDiv);
+
+    // Create textarea for comment
+    const commentTextarea = document.createElement('textarea');
+    commentTextarea.name = 'comment';
+    commentTextarea.id = 'review-comment';
+    commentTextarea.rows = 4;
+    commentTextarea.placeholder = "Write your review here...";
+    commentTextarea.required = true;
+    commentTextarea.value = review ? review.comment : '';  // Set the existing comment if review exists
+    reviewForm.appendChild(commentTextarea);
+
+    // Create the submit button
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.classList.add('btn', 'btn-success');
+    submitButton.textContent = review ? 'Update Review' : 'Submit Review';
+    reviewForm.appendChild(submitButton);
+
+    // Append the review form to the user review container
+    userReviewContainer.innerHTML = ''; // Clear any existing content
+    userReviewContainer.appendChild(reviewForm);
+
+    // Initialize star rating logic
+    initStarRating();
+}

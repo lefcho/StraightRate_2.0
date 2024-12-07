@@ -1,56 +1,74 @@
 {% extends 'common/base.html' %}
 {% block content %}
-{% load static %}
-<main>
-    <div class="details">
-        <div class="image-container">
-            <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
-        </div>
-        <div class="info-cont">
-            <div class="big-info-cont">
-                <div class="title-cont">
-                    <h1 class="big-title">{{ movie.title }}</h1>
-                    <p id="average-rating">Loading rating...</p>
+    {% load static %}
+    <div id="movie-details" data-movie-id="{{ movie.pk }}"
+         data-user-auth="{{ user.is_authenticated|yesno:'true,false' }}">
+    </div>
+    <main>
+        <div class="details">
+            <div class="image-container">
+                <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+            </div>
+            <div class="info-cont">
+                <div class="big-info-cont">
+                    <div class="title-cont">
+                        <h1 class="big-title">{{ movie.title }}</h1>
+                        <div>
+                            <p>{{ movie.get_average_rating }} <i class="fa-solid fa-star"></i></p>
+                        </div>
+                    </div>
+
+                    <div class="small-info-cont-ua">
+                        <div class="title-and-info">
+                            <p class="small-info">Released:</p>
+                            <h5 class="info">{{ movie.release_date }}</h5>
+                        </div>
+                        <div class="title-and-info">
+                            <p class="small-info">Genre:</p>
+                            {% for genre in movie.genres.all %}
+                                <a href="{% url 'movies-by-genre' genre=genre.genre_name %}">
+                                    <h5 class="info underline">{{ genre }}</h5>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <div class="title-and-info">
+                            <p class="small-info">Director/s:</p>
+                            {% for director in movie.directors.all %}
+                                <a href="{% url 'director-details' director.pk %}">
+                                    <h5 class="info underline">{{ director }}</h5>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <p class="description">
+                        {{ movie.description }}
+                    </p>
                 </div>
-
-                <div class="small-info-cont">
-                    <p class="small-info">Released:</p>
-                    <h5 class="info">{{ movie.release_date }}</h5>
-
-                    <p class="seperator"> | </p>
-
-                    <p class="small-info">Genres:</p>
-                    {% for genre in movie.genres.all %}
-                        <h5 class="info underline">{{ genre }}</h5>
-                    {% endfor %}
-
-                    <p class="seperator"> | </p>
-
-                    <p class="small-info">Director/s:</p>
-                    {% for director in movie.directors.all %}
-                        <h5 class="info underline">{{ director }}</h5>
-                    {% endfor %}
-                </div>
-
-                <p class="description">
-                    {{ movie.description }}
-                </p>
             </div>
         </div>
-    </div>
 
-    <div class="review-section">
-        <h2>Your Review</h2>
-        <div id="user-review-container">
-            <!-- User review form will be dynamically rendered here -->
-        </div>
+        <div class="review-section">
+            <h2>Your Review</h2>
+            <div id="user-review-container">
+                <div id="user-review-container">
+                    {% if user.is_authenticated %}
+                        <!-- Placeholder for dynamically rendered review form -->
+                        <div id="review-form"></div>
+                    {% else %}
+                        <div class="leave-review-cont">
+                            <p><a href="{% url 'login' %}" class="btn btn-primary">Log in to leave a review</a></p>
+                        </div>
+                    {% endif %}
+                </div>
 
-        <h2 id="title-review">Reviews:</h2>
-        <div class="reviews" id="reviews-container">
-            <!-- Reviews will be dynamically rendered here -->
-        </div>
-    </div>
-</main>
+                <h2 id="title-review">Reviews:</h2>
+                <div class="reviews" id="reviews-container">
+                    <!-- Reviews will be dynamically rendered here -->
+                </div>
+            </div>
+        </div> <!-- This closing div was missing -->
+    </main>
 
     <script type="text/javascript" src="{% static 'scripts/reviewHandler.js' %}"></script>
 {% endblock %}

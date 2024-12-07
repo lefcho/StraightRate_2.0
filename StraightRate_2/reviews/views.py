@@ -4,7 +4,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
-
 from .models import MovieReview
 from .serializers import MovieReviewSerializer
 from ..common.models import MovieReviewLike
@@ -36,7 +35,6 @@ class MovieReviewDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_update(self, serializer):
-        # Ensure the user is the owner before updating
         if serializer.instance.user != self.request.user:
             raise PermissionDenied("You do not have permission to edit this review.")
         serializer.save()
@@ -50,7 +48,6 @@ class MovieReviewLikeView(APIView):
         review = get_object_or_404(MovieReview, pk=pk)
         user = request.user
 
-        # Toggle like/unlike
         like, created = MovieReviewLike.objects.get_or_create(user=user, movie_review=review)
         if not created:
             like.delete()
