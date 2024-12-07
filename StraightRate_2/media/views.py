@@ -1,20 +1,16 @@
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
-from rest_framework.generics import RetrieveAPIView
-from rest_framework.permissions import AllowAny
-
+from django.views.generic import CreateView, ListView, DetailView
 from StraightRate_2.media.forms import MovieCreateForm, VideoGameCreateForm
 from StraightRate_2.media.models import Movie, VideoGame
-from StraightRate_2.media.serializers import MovieSerializer
 
 
-class MovieRetrieveAPIView(RetrieveAPIView):
-    queryset = Movie.objects.all()
-    serializer_class = MovieSerializer
-    permission_classes = [AllowAny]
+class MovieDetailsView(DetailView):
+    model = Movie
+    context_object_name = 'movie'
+    template_name = 'movies/movie-details.html'
 
 
 class MovieCreateView(PermissionRequiredMixin, CreateView):
