@@ -1,3 +1,5 @@
+import setStarsInteractive from './editReviewButtonsHandler'
+
 const movieDetails = document.getElementById('movie-details');
 const movieId = movieDetails.dataset.movieId;
 const userAuthenticated = movieDetails.dataset.userAuth === "true"; // Boolean conversion
@@ -53,7 +55,7 @@ function handleReviewFormSubmission(event) {
         .then(data => {
             // Handle successful submission (e.g., clear the form, show a success message)
             console.log('Review submitted successfully:', data);
-            createReviewForm(); // Reset the form after submission
+            populateFormWithData(ratingValue, comment)
             alert('Your review has been submitted!');
         })
         .catch(error => {
@@ -62,6 +64,44 @@ function handleReviewFormSubmission(event) {
         });
 }
 
+
+function populateFormWithData(score, comment) {
+    const starElements = document.querySelectorAll('.star');
+    const commentElement = document.getElementById('review-comment');
+    const reviewFormElement = document.getElementById('user-review-form');
+    const oldSubmitButton = document.getElementById('submit-new-btn')
+
+    oldSubmitButton.classList.add('hidden');
+    oldSubmitButton.setAttribute('disabled', 'disabled');
+
+    for (let i = 0; i < score; i++) {
+        starElements[i].classList.add('filled');
+    }
+    setStarsInteractive(false);
+
+    commentElement.value = comment;
+    commentElement.setAttribute('disabled', 'disabled');
+
+    const editButton = document.createElement('button');
+    editButton.classList.add('btn');
+    editButton.id = 'edit-button'
+    editButton.textContent = 'Update Review';
+    reviewFormElement.appendChild(editButton);
+
+    const newSubmitButton = document.createElement('button');
+    newSubmitButton.classList.add('btn');
+    newSubmitButton.classList.add('hidden');
+    newSubmitButton.id = 'cancel-button'
+    newSubmitButton.textContent = 'Cancel';
+    reviewFormElement.appendChild(newSubmitButton);
+
+    const cancelButton = document.createElement('button');
+    cancelButton.classList.add('btn');
+    cancelButton.classList.add('hidden');
+    cancelButton.id = 'submit-edited-button'
+    cancelButton.textContent = 'Cancel';
+    reviewFormElement.appendChild(cancelButton);
+}
 
 function createReviewForm(review = null) {
     // Create form element
@@ -105,8 +145,9 @@ function createReviewForm(review = null) {
     // Create the submit button
     const submitButton = document.createElement('button');
     submitButton.type = 'submit';
+    submitButton.id = 'submit-new-btn';
     submitButton.classList.add('btn', 'btn-success');
-    submitButton.textContent = review ? 'Update Review' : 'Submit Review';
+    submitButton.textContent = 'Submit Review';
     reviewForm.appendChild(submitButton);
 
     // Attach the submit event handler
