@@ -1,7 +1,7 @@
 {% extends 'common/base.html' %}
 {% block content %}
     {% load static %}
-    <div id="movie-details" data-movie-id="{{ movie.pk }}"
+    <div id="movie-data" data-movie-id="{{ movie.pk }}"
          data-user-auth="{{ user.is_authenticated|yesno:'true,false' }}">
     </div>
     <main>
