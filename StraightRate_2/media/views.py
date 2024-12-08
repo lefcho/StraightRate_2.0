@@ -5,12 +5,22 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 from StraightRate_2.media.forms import MovieCreateForm, VideoGameCreateForm
 from StraightRate_2.media.models import Movie, VideoGame
+from StraightRate_2.reviews.models import MovieReview
 
 
 class MovieDetailsView(DetailView):
     model = Movie
     context_object_name = 'movie'
     template_name = 'movies/movie-details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_review = MovieReview.objects.filter(movie=self.object, user=self.request.user).first()
+        if user_review:
+            context['user_review_id'] = user_review.id
+        else:
+            context['user_review_id'] = 0
+        return context
 
 
 class MovieCreateView(PermissionRequiredMixin, CreateView):

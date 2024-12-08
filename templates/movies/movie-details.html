@@ -2,7 +2,8 @@
 {% block content %}
     {% load static %}
     <div id="movie-data" data-movie-id="{{ movie.pk }}"
-         data-user-auth="{{ user.is_authenticated|yesno:'true,false' }}">
+         data-user-auth="{{ user.is_authenticated|yesno:'true,false' }}"
+         data-user-review-id="{{ user_review_id }}">
     </div>
     <main>
         <div class="details">
@@ -101,5 +102,5 @@
     <script type="module" src="{% static 'scripts/reviewHandler.js' %}"></script>
     <script type="module" src="{% static 'scripts/handleStars.js' %}"></script>
     <script type="module" src="{% static 'scripts/editReviewButtonsHandler.js' %}"></script>
-    
+
 {% endblock %}

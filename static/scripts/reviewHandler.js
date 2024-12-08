@@ -3,16 +3,21 @@ import {setStarsInteractive} from "./editReviewButtonsHandler.js";
 const movieDetails = document.getElementById('movie-data');
 const movieId = movieDetails.dataset.movieId;
 const userAuthenticated = movieDetails.dataset.userAuth === "true";
+const userReviewId = movieDetails.dataset.userReviewId;
 const submitButtonElement = document.getElementById('submit-review-button');
-// const userReviewContainer = document.getElementById('user-review-container');
+const ratingValueElement = document.getElementById('rating-value');
+const reviewCommentElement = document.getElementById('review-comment');
 const editButtonElement = document.getElementById('edit-review-btn');
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    const hasReviewed = !(userReviewId === "0")
 
-    if (userAuthenticated) {
+    if (userAuthenticated && !hasReviewed) {
         setStarsInteractive(true);
         submitButtonElement.addEventListener('click', handleReviewFormSubmission);
+    } else if (userAuthenticated && hasReviewed) {
+        fetchAndPopulateReview()
     }
 
 });
@@ -30,8 +35,8 @@ function handleReviewFormSubmission(event) {
 
     event.preventDefault();
 
-    const ratingValue = document.getElementById('rating-value').value;
-    const comment = document.getElementById('review-comment').value;
+    const ratingValue = ratingValueElement.value;
+    const comment = reviewCommentElement.value;
 
     const reviewData = {
         rating: ratingValue,
@@ -66,6 +71,34 @@ function handleReviewFormSubmission(event) {
             alert('There was an error submitting your review.');
         });
 }
+
+
+function fetchAndPopulateReview() {
+    const reviewUrl = `/reviews/${userReviewId}/`; // Construct the URL for the GET request
+
+    fetch(reviewUrl, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to fetch review data');
+            }
+        })
+        .then(data => {
+            const { rating, comment } = data;
+            populateFormWithData(rating, comment);
+        })
+        .catch(error => {
+            console.error('Error fetching review data:', error);
+            alert('There was an error loading your review.');
+        });
+}
+
 
 
 function populateFormWithData(score, comment) {
