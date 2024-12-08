@@ -1,18 +1,21 @@
 import {setStarsInteractive} from "./editReviewButtonsHandler.js";
 
-const movieDetails = document.getElementById('media-data');
-const movieId = movieDetails.dataset.mediaId;
-const userAuthenticated = movieDetails.dataset.userAuth === "true";
-const userReviewId = movieDetails.dataset.userReviewId;
+const mediaDataElement = document.getElementById('media-data');
+const mediaId = mediaDataElement.dataset.mediaId;
+const mediaType = mediaDataElement.dataset.mediaType;
+const userAuthenticated = mediaDataElement.dataset.userAuth === "true";
+const userReviewId = mediaDataElement.dataset.userReviewId;
 const submitButtonElement = document.getElementById('submit-review-button');
 const ratingValueElement = document.getElementById('rating-value');
 const reviewCommentElement = document.getElementById('review-comment');
 const editButtonElement = document.getElementById('edit-review-btn');
 const submitEditedButtonElement = document.getElementById('save-review-btn')
 const cancelButtonElement = document.getElementById('cancel-review-btn');
+const isMovie = (mediaType === "movie");
 
 document.addEventListener('DOMContentLoaded', () => {
-    const hasReviewed = !(userReviewId === "0")
+    const hasReviewed = !(userReviewId === "0");
+
 
     if (userAuthenticated && !hasReviewed) {
         setStarsInteractive(true);
@@ -36,20 +39,30 @@ function getCookie(name) {
 }
 
 function handleReviewFormSubmission(event) {
-
     event.preventDefault();
-
     const ratingValue = ratingValueElement.value;
     const comment = reviewCommentElement.value;
+    let reviewData;
+    let postReviewURL;
 
-    const reviewData = {
-        rating: ratingValue,
-        comment: comment,
-        movie: movieId,
-    };
+    if (isMovie) {
+        reviewData = {
+            rating: ratingValue,
+            comment: comment,
+            movie: mediaId,
+        };
+        postReviewURL = `/reviews/movies/${mediaId}/`
+    } else {
+        reviewData = {
+            rating: ratingValue,
+            comment: comment,
+            game: mediaId,
+        };
+        postReviewURL = `/reviews/games/${mediaId}/`
+    }
 
     // Submit the form via fetch
-    fetch(`/reviews/movies/${movieId}/`, {
+    fetch(postReviewURL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -76,7 +89,13 @@ function handleReviewFormSubmission(event) {
 
 
 function fetchAndPopulateReview() {
-    const reviewUrl = `/reviews/movie-review/${userReviewId}/`;
+    let reviewUrl;
+
+    if (isMovie) {
+        reviewUrl = `/reviews/movie-review/${userReviewId}/`;
+    } else {
+        reviewUrl = `/reviews/game-review/${userReviewId}/`
+    }
 
     fetch(reviewUrl, {
         method: 'GET',
@@ -105,16 +124,27 @@ function fetchAndPopulateReview() {
 function handleReviewUpdate(event) {
     event.preventDefault();
 
-    const reviewUrl = `/reviews/movie-review/${userReviewId}/`;
+    let reviewUrl;
 
     const updatedRating = ratingValueElement.value;
     const updatedComment = reviewCommentElement.value;
+    let updatedReviewData;
 
-    const updatedReviewData = {
-        rating: updatedRating,
-        comment: updatedComment,
-        movie: movieId,
-    };
+    if (isMovie) {
+        updatedReviewData = {
+            rating: updatedRating,
+            comment: updatedComment,
+            movie: mediaId,
+        };
+        reviewUrl = `/reviews/movie-review/${userReviewId}/`;
+    } else {
+        updatedReviewData = {
+            rating: updatedRating,
+            comment: updatedComment,
+            game: mediaId,
+        };
+        reviewUrl = `/reviews/game-review/${userReviewId}/`;
+    }
 
     fetch(reviewUrl, {
         method: 'PUT',
