@@ -61,7 +61,6 @@ function handleReviewFormSubmission(event) {
         postReviewURL = `/reviews/games/${mediaId}/`
     }
 
-    // Submit the form via fetch
     fetch(postReviewURL, {
         method: 'POST',
         headers: {
@@ -162,7 +161,7 @@ function handleReviewUpdate(event) {
             }
         })
         .then(data => {
-            // Handle successful update
+
             console.log('Review updated successfully:', data);
             populateFormWithData(updatedRating, updatedComment);
             submitEditedButtonElement.classList.add('hidden');
