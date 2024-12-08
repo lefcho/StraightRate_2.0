@@ -1,9 +1,15 @@
 {% extends 'common/base.html' %}
-
 {% block content %}
-    {% load static %}
-    <main>
-        <div class="details">
+{% load static %}
+
+<div id="media-data" data-media-id="{{ game.pk }}"
+     data-media-type="game"
+     data-user-auth="{{ user.is_authenticated|yesno:'true,false' }}"
+     data-user-review-id="{{ user_review_id }}">
+</div>
+
+<main>
+ <div class="details">
             <div class="image-container">
                 <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
             </div>
@@ -11,125 +17,90 @@
                 <div class="big-info-cont">
                     <div class="title-cont">
                         <h1 class="big-title">{{ game.title }}</h1>
-                        {% if game.get_average_rating %}
+                        <div>
                             <p>{{ game.get_average_rating }} <i class="fa-solid fa-star"></i></p>
-                        {% else %}
-                            <p>Not reviewed yet.</p>
-                        {% endif %}
+                        </div>
                     </div>
-                    <div class="small-info-cont">
-                        <p class="small-info">Released:</p>
-                        <h5 class="info">{{ game.release_date }}</h5>
-                        <p class="seperator"> | </p>
-                        <p class="small-info">Genre/s:</p>
-                        <a href="#">
+
+                    <div class="small-info-cont-ua">
+                        <div class="title-and-info">
+                            <p class="small-info">Released:</p>
+                            <h5 class="info">{{ game.release_date }}</h5>
+                        </div>
+                        <div class="title-and-info">
+                            <p class="small-info">Genre:</p>
                             {% for genre in game.genres.all %}
-                                <h5 class="info underline">{{ genre }}</h5>
+                                <a href="#">
+                                    <h5 class="info underline">{{ genre }}</h5>
+                                </a>
                             {% endfor %}
-                        </a>
-                        <p class="seperator"> | </p>
-                        <p class="small-info">Developer:</p>
-                        <a href="#">
-                            <h5 class="info underline">{{ game.developer.developer_name }}</h5>
-                        </a>
+                        </div>
+                        <div class="title-and-info">
+                            <p class="small-info">Developer:</p>
+                                <a href="#">
+                                    <h5 class="info underline">{{ game.developer }}</h5>
+                                </a>
+                        </div>
                     </div>
-                    <p class="description">{{ game.description }}</p>
+
+                    <p class="description">
+                        {{ game.description }}
+                    </p>
                 </div>
             </div>
         </div>
 
-        <!-- Reviews and Leave Review Section -->
-        <div class="review-section">
-            {% if user.is_authenticated %}
-                {% if user_review %}
-                    <!-- User's existing review with Edit and Delete buttons -->
-                    <div class="user-review">
-                        <h2>Your Review</h2>
-                        <div class="review-actions">
-                            <form class="review-form" method="POST">
-                                {% csrf_token %}
-                                <div class="star-rating">
-                                    <!-- Hidden input to store the rating value -->
-                                    <input type="hidden" name="rating" id="rating-value"
-                                           value="{{ user_review.rating }}"
-                                           data-initial-rating="{{ user_review.rating }}">
-                                    <!-- Star icons that the user clicks -->
-                                    <i class="fa fa-star star" data-value="1"></i>
-                                    <i class="fa fa-star star" data-value="2"></i>
-                                    <i class="fa fa-star star" data-value="3"></i>
-                                    <i class="fa fa-star star" data-value="4"></i>
-                                    <i class="fa fa-star star" data-value="5"></i>
-                                </div>
-                                <br>
-                                <!-- Enabled the textarea to make sure its content can be submitted -->
-                                <textarea name="comment" id="comment" rows="4"
-                                          required>{{ user_review.comment }}</textarea>
-                                <br>
-                                <div class="form-buttons">
-                                    <button type="button" id="edit-review-btn" class="btn btn-primary">Edit Review
-                                    </button>
-                                    <button type="submit" id="save-review-btn" class="btn btn-success hidden">Save
-                                        Review
-                                    </button>
-                                    <button type="button" id="cancel-review-btn" class="btn btn-danger hidden">Cancel
-                                    </button>
-                                </div>
-                            </form>
-
+    <div class="review-section">
+        <h2>Your Review</h2>
+        <div id="user-review-container">
+            <div id="user-review-container">
+                {% if user.is_authenticated %}
+                    <form class="review-form" method="POST">
+                        {% csrf_token %}
+                        <div class="star-rating">
+                            <input type="hidden" name="rating" id="rating-value"
+                                   value="{{ form.rating.value|default:0 }}">
+                            <i class="fa fa-star star" data-value="1"></i>
+                            <i class="fa fa-star star" data-value="2"></i>
+                            <i class="fa fa-star star" data-value="3"></i>
+                            <i class="fa fa-star star" data-value="4"></i>
+                            <i class="fa fa-star star" data-value="5"></i>
                         </div>
-                    </div>
-
+                        <br>
+                        <textarea name="comment" id="review-comment" rows="4" required
+                                  placeholder="Write a game review">{{ form.comment.value|default:'' }}</textarea>
+                        <br>
+                        <div class="form-buttons">
+                            <button type="submit" id="submit-review-button"
+                                    class="btn-three draw-border btn-primary">Post Review
+                            </button>
+                            <button type="button" id="edit-review-btn" class="btn btn-primary hidden">Edit Review
+                            </button>
+                            <button type="submit" id="save-review-btn" class="btn btn-success hidden">Save
+                                Review
+                            </button>
+                            <button type="button" id="cancel-review-btn" class="btn btn-danger hidden">Cancel
+                            </button>
+                        </div>
+                    </form>
+                    <div id="review-form"></div>
                 {% else %}
-                    <!-- Show Leave Review button if the user hasn't left a review -->
                     <div class="leave-review-cont">
-                        <a href="#" id="toggle-review" onclick="toggleReviewForm()">Leave Review</a>
+                        <p><a href="{% url 'login' %}" class="btn btn-primary">Log in to leave a review</a></p>
                     </div>
                 {% endif %}
-            {% else %}
-                <div class="leave-review-cont">
-                    <p><a href="{% url 'login' %}">log in</a> to leave a review.</p>
-                </div>
-            {% endif %}
-
-            <!-- Review Form - Hidden by default -->
-            <div id="review-form-container" class="hidden">
-                <form class="review-form" method="POST">
-                    {% csrf_token %}
-                    <div class="star-rating">
-                        <input type="hidden" name="rating" id="rating-value" value="{{ form.rating.value|default:0 }}">
-                        <i class="fa fa-star star" data-value="1"></i>
-                        <i class="fa fa-star star" data-value="2"></i>
-                        <i class="fa fa-star star" data-value="3"></i>
-                        <i class="fa fa-star star" data-value="4"></i>
-                        <i class="fa fa-star star" data-value="5"></i>
-                    </div>
-                    <br>
-                    <textarea name="comment" id="comment" rows="4" required
-                              placeholder="Write a video game review">{{ form.comment.value|default:'' }}</textarea>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Post Review</button>
-                </form>
             </div>
 
-            <!-- Reviews Section -->
             <h2 id="title-review">Reviews:</h2>
-            <div class="reviews">
-                {% if reviews %}
-                    {% for review in reviews %}
-                        <div class="review">
-                            <h3 class="review-username">{{ review.user.username }}</h3>
-                            <p class="review-rating">Rating: {{ review.rating }} <i class="fa-solid fa-star"></i></p>
-                            <p class="review-comment">{{ review.comment }}</p>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No reviews yet.</p>
-                {% endif %}
+            <div class="reviews" id="reviews-container">
+                <!-- Reviews will be dynamically rendered here -->
             </div>
         </div>
-    </main>
+    </div> 
+</main>
 
-    <script type="text/javascript" src="{% static 'scripts/toggleReview.js' %}"></script>
-    <script type="text/javascript" src="{% static 'scripts/handleStars.js' %}"></script>
-    <script type="text/javascript" src="{% static 'scripts/editReviewButtonsHandler.js' %}"></script>
+{#<script type="module" src="{% static 'scripts/reviewHandler.js' %}"></script>#}
+{#<script type="module" src="{% static 'scripts/handleStars.js' %}"></script>#}
+{#<script type="module" src="{% static 'scripts/editReviewButtonsHandler.js' %}"></script>#}
+
 {% endblock %}

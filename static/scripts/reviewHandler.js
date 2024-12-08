@@ -1,7 +1,7 @@
 import {setStarsInteractive} from "./editReviewButtonsHandler.js";
 
-const movieDetails = document.getElementById('movie-data');
-const movieId = movieDetails.dataset.movieId;
+const movieDetails = document.getElementById('media-data');
+const movieId = movieDetails.dataset.mediaId;
 const userAuthenticated = movieDetails.dataset.userAuth === "true";
 const userReviewId = movieDetails.dataset.userReviewId;
 const submitButtonElement = document.getElementById('submit-review-button');
