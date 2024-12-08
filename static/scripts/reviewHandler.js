@@ -8,7 +8,8 @@ const submitButtonElement = document.getElementById('submit-review-button');
 const ratingValueElement = document.getElementById('rating-value');
 const reviewCommentElement = document.getElementById('review-comment');
 const editButtonElement = document.getElementById('edit-review-btn');
-
+const submitEditedButtonElement = document.getElementById('save-review-btn')
+const cancelButtonElement = document.getElementById('cancel-review-btn');
 
 document.addEventListener('DOMContentLoaded', () => {
     const hasReviewed = !(userReviewId === "0")
@@ -17,21 +18,24 @@ document.addEventListener('DOMContentLoaded', () => {
         setStarsInteractive(true);
         submitButtonElement.addEventListener('click', handleReviewFormSubmission);
     } else if (userAuthenticated && hasReviewed) {
+        setStarsInteractive(true);
         fetchAndPopulateReview()
+        submitEditedButtonElement.addEventListener('click', handleReviewUpdate)
     }
 
 });
 
 
-function handleReviewFormSubmission(event) {
-    function getCookie(name) {
-        const cookies = document.cookie.split(';');
-        for (const cookie of cookies) {
-            const [key, value] = cookie.trim().split('=');
-            if (key === name) return value;
-        }
-        return null;
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+        const [key, value] = cookie.trim().split('=');
+        if (key === name) return value;
     }
+    return null;
+}
+
+function handleReviewFormSubmission(event) {
 
     event.preventDefault();
 
@@ -64,7 +68,6 @@ function handleReviewFormSubmission(event) {
             // Handle successful submission (e.g., clear the form, show a success message)
             console.log('Review submitted successfully:', data);
             populateFormWithData(ratingValue, comment)
-            alert('Your review has been submitted!');
         })
         .catch(error => {
             console.error('Error submitting review:', error);
@@ -90,7 +93,7 @@ function fetchAndPopulateReview() {
             }
         })
         .then(data => {
-            const { rating, comment } = data;
+            const {rating, comment} = data;
             populateFormWithData(rating, comment);
         })
         .catch(error => {
@@ -99,6 +102,48 @@ function fetchAndPopulateReview() {
         });
 }
 
+
+function handleReviewUpdate(event) {
+    event.preventDefault();
+
+    const reviewUrl = `/reviews/${userReviewId}/`; // Construct the URL for the PUT request
+
+    const updatedRating = ratingValueElement.value; // Get the updated rating value
+    const updatedComment = reviewCommentElement.value; // Get the updated comment value
+
+    const updatedReviewData = {
+        rating: updatedRating,
+        comment: updatedComment,
+        movie: movieId,
+    };
+
+    fetch(reviewUrl, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify(updatedReviewData),
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to update review');
+            }
+        })
+        .then(data => {
+            // Handle successful update
+            console.log('Review updated successfully:', data);
+            populateFormWithData(updatedRating, updatedComment);
+            submitEditedButtonElement.classList.add('hidden');
+            cancelButtonElement.classList.add('hidden');
+        })
+        .catch(error => {
+            console.error('Error updating review:', error);
+            alert('There was an error updating your review.');
+        });
+}
 
 
 function populateFormWithData(score, comment) {
@@ -111,6 +156,8 @@ function populateFormWithData(score, comment) {
     for (let i = 0; i < score; i++) {
         starElements[i].classList.add('filled');
     }
+
+    ratingValueElement.value = score;
     setStarsInteractive(false);
 
     commentElement.value = comment;

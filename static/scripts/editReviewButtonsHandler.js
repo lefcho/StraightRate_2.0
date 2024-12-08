@@ -7,13 +7,10 @@ const editButtonElement = document.getElementById('edit-review-btn');
 const cancelButtonElement = document.getElementById('cancel-review-btn');
 const submitEditedButtonElement = document.getElementById('save-review-btn')
 
-// Store the original values of the textarea and rating
-if (commentArea) {
-    originalComment = commentArea.value;
-}
-if (rating) {
-    originalRating = rating.value;
-}
+
+originalComment = commentArea.value;
+originalRating = rating.value;
+
 
 // Get star elements
 const stars = document.querySelectorAll('.star');
@@ -70,6 +67,7 @@ function highlightStars(rating) {
 // When the "Edit" button is clicked
 editButtonElement.addEventListener('click', function () {
     originalRating = rating.value;
+    console.log(originalRating);
     originalComment = commentArea.value;
 
     // Enable the textarea
@@ -102,6 +100,7 @@ cancelButtonElement.addEventListener('click', function () {
 
     // Reset the rating to the original value
     rating.value = originalRating;
+    console.log(originalRating);
 
     // Hide the Save and Cancel buttons
     submitEditedButtonElement.classList.add('hidden');
