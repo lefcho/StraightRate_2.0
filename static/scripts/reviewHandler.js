@@ -65,7 +65,6 @@ function handleReviewFormSubmission(event) {
             }
         })
         .then(data => {
-            // Handle successful submission (e.g., clear the form, show a success message)
             console.log('Review submitted successfully:', data);
             populateFormWithData(ratingValue, comment)
         })
@@ -77,7 +76,7 @@ function handleReviewFormSubmission(event) {
 
 
 function fetchAndPopulateReview() {
-    const reviewUrl = `/reviews/${userReviewId}/`; // Construct the URL for the GET request
+    const reviewUrl = `/reviews/${userReviewId}/`;
 
     fetch(reviewUrl, {
         method: 'GET',
@@ -106,10 +105,10 @@ function fetchAndPopulateReview() {
 function handleReviewUpdate(event) {
     event.preventDefault();
 
-    const reviewUrl = `/reviews/${userReviewId}/`; // Construct the URL for the PUT request
+    const reviewUrl = `/reviews/${userReviewId}/`;
 
-    const updatedRating = ratingValueElement.value; // Get the updated rating value
-    const updatedComment = reviewCommentElement.value; // Get the updated comment value
+    const updatedRating = ratingValueElement.value;
+    const updatedComment = reviewCommentElement.value;
 
     const updatedReviewData = {
         rating: updatedRating,
