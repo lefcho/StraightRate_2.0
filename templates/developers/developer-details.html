@@ -15,7 +15,7 @@
                     <div class="game">
                         <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
                         <h3>{{ game.title }}</h3>
-                        <p>{{ game.average_rating }}<i class="fa-solid fa-star"></i></p>
+                        <p>{{ game.get_average_rating }}<i class="fa-solid fa-star"></i></p>
                     </div>
                 </a>
             {% endfor %}

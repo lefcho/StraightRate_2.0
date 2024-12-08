@@ -73,7 +73,7 @@
         <div class="reviews">
             {% for review in movie_reviews %}
                 <div class="review">
-                    <h3><a href="#">{{ review.movie.title }}</a></h3>
+                    <h3><a href="{% url 'details-movie' review.movie.pk %}">{{ review.movie.title }}</a></h3>
                     <div class="review-info">
                         <div class="display-row">
                             <p class="review-label">Rating:</p>
@@ -93,7 +93,7 @@
         <div class="reviews">
             {% for review in video_game_reviews %}
                 <div class="review">
-                    <h3><a href="#">{{ review.game.title }}</a>
+                    <h3><a href="{% url 'details-games' review.game.pk %}">{{ review.game.title }}</a>
                     </h3>
                     <div class="review-info">
                         <div class="display-row">

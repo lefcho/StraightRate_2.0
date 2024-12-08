@@ -10,7 +10,7 @@
                     <div class="movie">
                         <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
                         <h3>{{ movie.title }}</h3>
-                        <p>{{ movie.average_rating }}<i class="fa-solid fa-star"></i></p>
+                        <p>{{ movie.get_average_rating }}<i class="fa-solid fa-star"></i></p>
                     </div>
                 </a>
                 {% empty %}

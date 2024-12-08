@@ -30,14 +30,14 @@
                         <div class="title-and-info">
                             <p class="small-info">Genre:</p>
                             {% for genre in game.genres.all %}
-                                <a href="#">
+                                <a href="{% url 'games-by-genre' genre=genre.genre_name %}">
                                     <h5 class="info underline">{{ genre }}</h5>
                                 </a>
                             {% endfor %}
                         </div>
                         <div class="title-and-info">
                             <p class="small-info">Developer:</p>
-                                <a href="#">
+                                <a href="{% url 'developer-details' game.developer.pk %}">
                                     <h5 class="info underline">{{ game.developer }}</h5>
                                 </a>
                         </div>
