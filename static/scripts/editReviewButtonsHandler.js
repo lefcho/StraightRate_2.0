@@ -16,7 +16,7 @@ if (rating) {
 const stars = document.querySelectorAll('.star');
 
 // Function to make stars interactive or not
-function setStarsInteractive(interactive) {
+export default function setStarsInteractive(interactive) {
     stars.forEach(star => {
         if (interactive) {
             star.classList.remove('disabled');

@@ -1,4 +1,4 @@
-import setStarsInteractive from './editReviewButtonsHandler'
+import setStarsInteractive from "./editReviewButtonsHandler";
 
 const movieDetails = document.getElementById('movie-details');
 const movieId = movieDetails.dataset.movieId;
@@ -99,7 +99,7 @@ function populateFormWithData(score, comment) {
     cancelButton.classList.add('btn');
     cancelButton.classList.add('hidden');
     cancelButton.id = 'submit-edited-button'
-    cancelButton.textContent = 'Cancel';
+    cancelButton.textContent = 'Submit';
     reviewFormElement.appendChild(cancelButton);
 }
 
