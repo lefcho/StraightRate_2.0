@@ -76,7 +76,7 @@ function handleReviewFormSubmission(event) {
 
 
 function fetchAndPopulateReview() {
-    const reviewUrl = `/reviews/${userReviewId}/`;
+    const reviewUrl = `/reviews/movie-review/${userReviewId}/`;
 
     fetch(reviewUrl, {
         method: 'GET',
@@ -105,7 +105,7 @@ function fetchAndPopulateReview() {
 function handleReviewUpdate(event) {
     event.preventDefault();
 
-    const reviewUrl = `/reviews/${userReviewId}/`;
+    const reviewUrl = `/reviews/movie-review/${userReviewId}/`;
 
     const updatedRating = ratingValueElement.value;
     const updatedComment = reviewCommentElement.value;

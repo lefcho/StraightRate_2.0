@@ -4,10 +4,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
-from .models import MovieReview
-from .serializers import MovieReviewSerializer
+from .models import MovieReview, VideoGameReview
+from .serializers import MovieReviewSerializer, VideoGameReviewSerializer
 from ..common.models import MovieReviewLike
-from ..media.models import Movie
 
 
 class MovieReviewListCreateView(ListCreateAPIView):
@@ -22,10 +21,33 @@ class MovieReviewListCreateView(ListCreateAPIView):
         return MovieReview.objects.filter(movie_id=movie_id)
 
 
+class VideoGameReviewListCreateView(ListCreateAPIView):
+    serializer_class = VideoGameReviewSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+
+        game_id = self.kwargs.get('game_id')
+        if not game_id:
+            raise ValidationError({"error": "Video game ID is required"})
+        return VideoGameReview.objects.filter(game_id=game_id)
+
+
 # Retrieve, Update, Delete a Movie Review
 class MovieReviewDetailView(RetrieveUpdateDestroyAPIView):
     queryset = MovieReview.objects.all()
     serializer_class = MovieReviewSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_update(self, serializer):
+        if serializer.instance.user != self.request.user:
+            raise PermissionDenied("You do not have permission to edit this review.")
+        serializer.save()
+
+
+class VideoGameReviewDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = VideoGameReview.objects.all()
+    serializer_class = VideoGameReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_update(self, serializer):
