@@ -1,8 +1,11 @@
 let originalComment = '';
 let originalRating = 0;
 
-const commentArea = document.querySelector('.review-form textarea');
+const commentArea = document.getElementById('review-comment');
 const rating = document.getElementById('rating-value');
+const editButtonElement = document.getElementById('edit-review-btn');
+const cancelButtonElement = document.getElementById('cancel-review-btn');
+const submitEditedButtonElement = document.getElementById('save-review-btn')
 
 // Store the original values of the textarea and rating
 if (commentArea) {
@@ -16,7 +19,7 @@ if (rating) {
 const stars = document.querySelectorAll('.star');
 
 // Function to make stars interactive or not
-export default function setStarsInteractive(interactive) {
+export function setStarsInteractive(interactive) {
     stars.forEach(star => {
         if (interactive) {
             star.classList.remove('disabled');
@@ -65,15 +68,18 @@ function highlightStars(rating) {
 }
 
 // When the "Edit" button is clicked
-document.getElementById('edit-review-btn').addEventListener('click', function() {
+editButtonElement.addEventListener('click', function () {
+    originalRating = rating.value;
+    originalComment = commentArea.value;
+
     // Enable the textarea
     if (commentArea) {
         commentArea.disabled = false;
     }
 
     // Show the Save and Cancel buttons
-    document.getElementById('save-review-btn').classList.remove('hidden');
-    document.getElementById('cancel-review-btn').classList.remove('hidden');
+    submitEditedButtonElement.classList.remove('hidden');
+    cancelButtonElement.classList.remove('hidden');
 
     // Hide the Edit button
     this.classList.add('hidden');
@@ -83,7 +89,7 @@ document.getElementById('edit-review-btn').addEventListener('click', function() 
 });
 
 // When the "Cancel" button is clicked
-document.getElementById('cancel-review-btn').addEventListener('click', function() {
+cancelButtonElement.addEventListener('click', function () {
     // Reset the textarea to its original value
     if (commentArea) {
         commentArea.value = originalComment;
@@ -98,11 +104,11 @@ document.getElementById('cancel-review-btn').addEventListener('click', function(
     rating.value = originalRating;
 
     // Hide the Save and Cancel buttons
-    document.getElementById('save-review-btn').classList.add('hidden');
-    document.getElementById('cancel-review-btn').classList.add('hidden');
+    submitEditedButtonElement.classList.add('hidden');
+    cancelButtonElement.classList.add('hidden');
 
     // Show the Edit button
-    document.getElementById('edit-review-btn').classList.remove('hidden');
+    editButtonElement.classList.remove('hidden');
 
     // Make stars non-interactive
     setStarsInteractive(false);

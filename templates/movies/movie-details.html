@@ -53,7 +53,35 @@
             <div id="user-review-container">
                 <div id="user-review-container">
                     {% if user.is_authenticated %}
-                        <!-- Placeholder for dynamically rendered review form -->
+                        <form class="review-form" method="POST">
+                            {% csrf_token %}
+                            <div class="star-rating">
+                                <input type="hidden" name="rating" id="rating-value"
+                                       value="{{ form.rating.value|default:0 }}">
+                                <i class="fa fa-star star" data-value="1"></i>
+                                <i class="fa fa-star star" data-value="2"></i>
+                                <i class="fa fa-star star" data-value="3"></i>
+                                <i class="fa fa-star star" data-value="4"></i>
+                                <i class="fa fa-star star" data-value="5"></i>
+                            </div>
+                            <br>
+                            <!-- Enabled the textarea to make sure its content can be submitted -->
+                            <textarea name="comment" id="review-comment" rows="4" required
+                                      placeholder="Write a movie review">{{ form.comment.value|default:'' }}</textarea>
+                            <br>
+                            <div class="form-buttons">
+                                <button type="submit" id="submit-review-button"
+                                        class="btn-three draw-border btn-primary">Post Review
+                                </button>
+                                <button type="button" id="edit-review-btn" class="btn btn-primary hidden">Edit Review
+                                </button>
+                                <button type="submit" id="save-review-btn" class="btn btn-success hidden">Save
+                                    Review
+                                </button>
+                                <button type="button" id="cancel-review-btn" class="btn btn-danger hidden">Cancel
+                                </button>
+                            </div>
+                        </form>
                         <div id="review-form"></div>
                     {% else %}
                         <div class="leave-review-cont">
@@ -72,5 +100,6 @@
 
     <script type="module" src="{% static 'scripts/reviewHandler.js' %}"></script>
     <script type="module" src="{% static 'scripts/handleStars.js' %}"></script>
-
+    <script type="module" src="{% static 'scripts/editReviewButtonsHandler.js' %}"></script>
+    
 {% endblock %}
