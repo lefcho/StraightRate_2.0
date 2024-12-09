@@ -1,11 +1,14 @@
 import {getCookie} from "./reviewHandler.js";
 
+const mediaDataElement = document.getElementById('media-data');
+const mediaId = mediaDataElement.dataset.mediaId;
+const mediaType = mediaDataElement.dataset.mediaType;
+const isMovie = (mediaType === "movie");
+const reviewsContainer = document.getElementById('reviews-container');
+const loadingIndicator = document.getElementById('loading-indicator');
+
 document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
-    const mediaDataElement = document.getElementById('media-data');
-    const mediaId = mediaDataElement.dataset.mediaId;
-    const reviewsContainer = document.getElementById('reviews-container');
-    const loadingIndicator = document.getElementById('loading-indicator');
     let isFetching = false;
 
     function fetchReviews() {
@@ -14,7 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
         isFetching = true;
         loadingIndicator.style.display = 'block';
 
-        fetch(`/reviews/movie-reviews/${mediaId}/?page=${currentPage}`, {
+        let get_reviews_url;
+
+        if (isMovie) {
+            get_reviews_url = `/reviews/movie-reviews/${mediaId}/?page=${currentPage}`;
+        } else {
+            get_reviews_url = `/reviews/game-reviews/${mediaId}/?page=${currentPage}`
+        }
+
+        fetch(get_reviews_url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,11 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Heart icon
         const heartIcon = document.createElement('i');
-         if (review.liked) {
-             heartIcon.classList.add('fa-solid', 'fa-heart');
-         } else {
-             heartIcon.classList.add('fa-regular', 'fa-heart');
-         }
+        if (review.liked) {
+            heartIcon.classList.add('fa-solid', 'fa-heart');
+        } else {
+            heartIcon.classList.add('fa-regular', 'fa-heart');
+        }
         likeDiv.appendChild(heartIcon);
 
         topDiv.appendChild(likeDiv);
@@ -104,8 +115,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleLike(reviewId, likeCountElement, heartIcon) {
-        // Send a POST request to like/unlike the review
-        fetch(`/reviews/like/movie-review/${reviewId}/`, {
+
+        let like_url;
+
+        if (isMovie) {
+            like_url =`/reviews/like/movie-review/${reviewId}/`;
+        } else {
+            like_url = `/reviews/like/game-review/${reviewId}/`;
+        }
+
+        fetch(like_url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

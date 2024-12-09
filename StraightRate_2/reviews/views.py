@@ -106,7 +106,7 @@ class VideoGameReviewLikeView(APIView):
         review = get_object_or_404(VideoGameReview, pk=pk)
         user = request.user
 
-        like, created = VideoGameReviewLike.objects.get_or_create(user=user, video_game_review=review)
+        like, created = VideoGameReviewLike.objects.get_or_create(user=user, game_review=review)
 
         if not created:
             like.delete()
