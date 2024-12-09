@@ -1,5 +1,6 @@
 from rest_framework.exceptions import PermissionDenied, ValidationError
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
@@ -7,6 +8,12 @@ from django.shortcuts import get_object_or_404
 from .models import MovieReview, VideoGameReview
 from .serializers import MovieReviewSerializer, VideoGameReviewSerializer
 from ..common.models import MovieReviewLike
+
+
+class MovieReviewPagination(PageNumberPagination):
+    page_size = 1
+    page_size_query_param = 'page_size'
+    max_page_size = 10
 
 
 class MovieReviewListCreateView(ListCreateAPIView):
@@ -33,7 +40,15 @@ class VideoGameReviewListCreateView(ListCreateAPIView):
         return VideoGameReview.objects.filter(game_id=game_id)
 
 
-# Retrieve, Update, Delete a Movie Review
+class MovieReviewListView(ListAPIView):
+    serializer_class = MovieReviewSerializer
+    pagination_class = MovieReviewPagination
+
+    def get_queryset(self):
+        movie_id = self.kwargs.get('movie_id')
+        return MovieReview.objects.filter(movie_id=movie_id)
+
+
 class MovieReviewDetailView(RetrieveUpdateDestroyAPIView):
     queryset = MovieReview.objects.all()
     serializer_class = MovieReviewSerializer
