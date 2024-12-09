@@ -80,6 +80,7 @@ class MovieReviewLikeView(APIView):
         user = request.user
 
         like, created = MovieReviewLike.objects.get_or_create(user=user, movie_review=review)
+
         if not created:
             like.delete()
             liked = False

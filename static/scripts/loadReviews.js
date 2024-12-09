@@ -1,3 +1,5 @@
+import {getCookie} from "./reviewHandler.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
     const mediaDataElement = document.getElementById('media-data');
@@ -41,61 +43,92 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function appendReview(review) {
-    // Create the main review container
-    const reviewElement = document.createElement('div');
-    reviewElement.classList.add('review');
+        // Create the main review container
+        const reviewElement = document.createElement('div');
+        reviewElement.classList.add('review');
 
-    // Create the top container
-    const topDiv = document.createElement('div');
-    topDiv.classList.add('review-top-div');
+        // Create the top container
+        const topDiv = document.createElement('div');
+        topDiv.classList.add('review-top-div');
 
-    // Add username
-    const usernameElement = document.createElement('h3');
-    usernameElement.classList.add('review-username');
-    usernameElement.textContent = review.user;
-    topDiv.appendChild(usernameElement);
+        // Add username
+        const usernameElement = document.createElement('h3');
+        usernameElement.classList.add('review-username');
+        usernameElement.textContent = review.user;
+        topDiv.appendChild(usernameElement);
 
-    // Create the like container
-    const likeDiv = document.createElement('div');
-    likeDiv.classList.add('like-div');
+        // Create the like container
+        const likeDiv = document.createElement('div');
+        likeDiv.classList.add('like-div');
+        likeDiv.addEventListener('click', () => handleLike(review.id, likeCountElement, heartIcon));
 
-    // Like count
-    const likeCountElement = document.createElement('p');
-    likeCountElement.classList.add('like-count');
-    likeCountElement.textContent = review.like_count;
-    likeDiv.appendChild(likeCountElement);
+        // Like count
+        const likeCountElement = document.createElement('p');
+        likeCountElement.classList.add('like-count');
+        likeCountElement.textContent = review.like_count;
+        likeDiv.appendChild(likeCountElement);
 
-    // Heart icon
-    const heartIcon = document.createElement('i');
-    heartIcon.classList.add('fa-regular', 'fa-heart');
-    likeDiv.appendChild(heartIcon);
+        // Heart icon
+        const heartIcon = document.createElement('i');
+         if (review.liked) {
+             heartIcon.classList.add('fa-solid', 'fa-heart');
+         } else {
+             heartIcon.classList.add('fa-regular', 'fa-heart');
+         }
+        likeDiv.appendChild(heartIcon);
 
-    topDiv.appendChild(likeDiv);
-    reviewElement.appendChild(topDiv);
+        topDiv.appendChild(likeDiv);
+        reviewElement.appendChild(topDiv);
 
-    // Add rating
-    const ratingElement = document.createElement('p');
-    ratingElement.classList.add('review-rating');
-    const ratingText = document.createTextNode(`Rating: ${review.rating} `);
-    ratingElement.appendChild(ratingText);
+        // Add rating
+        const ratingElement = document.createElement('p');
+        ratingElement.classList.add('review-rating');
+        const ratingText = document.createTextNode(`Rating: ${review.rating} `);
+        ratingElement.appendChild(ratingText);
 
-    const starIcon = document.createElement('i');
-    starIcon.classList.add('fa-solid', 'fa-star');
-    starIcon.setAttribute('aria-hidden', 'true');
-    ratingElement.appendChild(starIcon);
+        const starIcon = document.createElement('i');
+        starIcon.classList.add('fa-solid', 'fa-star');
+        starIcon.setAttribute('aria-hidden', 'true');
+        ratingElement.appendChild(starIcon);
 
-    reviewElement.appendChild(ratingElement);
+        reviewElement.appendChild(ratingElement);
 
-    // Add comment
-    const commentElement = document.createElement('p');
-    commentElement.classList.add('review-comment');
-    commentElement.textContent = review.comment;
-    reviewElement.appendChild(commentElement);
+        // Add comment
+        const commentElement = document.createElement('p');
+        commentElement.classList.add('review-comment');
+        commentElement.textContent = review.comment;
+        reviewElement.appendChild(commentElement);
 
-    // Append to container
-    reviewsContainer.appendChild(reviewElement);
-}
+        // Append to container
+        reviewsContainer.appendChild(reviewElement);
+    }
 
+    function handleLike(reviewId, likeCountElement, heartIcon) {
+        // Send a POST request to like/unlike the review
+        fetch(`/reviews/like/movie-review/${reviewId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.liked) {
+                    heartIcon.classList.remove('fa-regular');
+                    heartIcon.classList.add('fa-solid');
+                } else {
+                    heartIcon.classList.remove('fa-solid');
+                    heartIcon.classList.add('fa-regular');
+                }
+
+                likeCountElement.textContent = data.like_count;
+            })
+            .catch(error => {
+                console.error('Error liking the review:', error);
+            });
+    }
 
     function handleScroll() {
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
