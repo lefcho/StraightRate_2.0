@@ -63,7 +63,7 @@ class VideoGameCreateView(PermissionRequiredMixin, CreateView):
 class MovieListApproveView(PermissionRequiredMixin, ListView):
     template_name = 'movies/movies-approve.html'
     context_object_name = 'movies'
-    paginate_by = 2
+    paginate_by = 5
     model = Movie
     permission_required = 'media.can_approve_movies'
 
@@ -77,7 +77,7 @@ class MovieListApproveView(PermissionRequiredMixin, ListView):
 class VideoGamesListApproveView(PermissionRequiredMixin, ListView):
     template_name = 'video-games/video-game-approve.html'
     context_object_name = 'games'
-    paginate_by = 1
+    paginate_by = 5
     model = VideoGame
     permission_required = 'media.can_approve_games'
 
@@ -112,7 +112,7 @@ class MovieByGenreView(ListView):
     model = Movie
     context_object_name = 'movies'
     template_name = 'movies/movies-by-genre.html'
-    paginate_by = 1
+    paginate_by = 5
 
     def get_queryset(self):
         genre = self.kwargs['genre'].lower()
@@ -128,7 +128,7 @@ class VideoGameByGenreView(ListView):
     model = VideoGame
     context_object_name = 'games'
     template_name = 'video-games/video-games-by-genre.html'
-    paginate_by = 1
+    paginate_by = 5
 
     def get_queryset(self):
         genre = self.kwargs['genre'].lower()
