@@ -1,3 +1,4 @@
+from rest_framework import serializers
 from rest_framework.relations import StringRelatedField
 from rest_framework.serializers import ModelSerializer
 
@@ -6,10 +7,11 @@ from StraightRate_2.reviews.models import MovieReview, VideoGameReview
 
 class MovieReviewSerializer(ModelSerializer):
     user = StringRelatedField(read_only=True)
+    like_count = serializers.IntegerField(source='likes.count', read_only=True)
 
     class Meta:
         model = MovieReview
-        fields = '__all__'
+        fields = ['id', 'user', 'rating', 'comment', 'like_count']
         read_only_fields = ['user', 'last_edited']
 
     def create(self, validated_data):

@@ -41,18 +41,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function appendReview(review) {
-        const reviewElement = document.createElement('div');
-        reviewElement.classList.add('review');
+    // Create the main review container
+    const reviewElement = document.createElement('div');
+    reviewElement.classList.add('review');
 
-        reviewElement.innerHTML = `
-            <div class="review-header">
-                <p><strong>${review.user}</strong></p>
-                <p>${review.rating} <i class="fa fa-star"></i></p>
-            </div>
-            <p>${review.comment}</p>
-        `;
-        reviewsContainer.appendChild(reviewElement);
-    }
+    // Create the top container
+    const topDiv = document.createElement('div');
+    topDiv.classList.add('review-top-div');
+
+    // Add username
+    const usernameElement = document.createElement('h3');
+    usernameElement.classList.add('review-username');
+    usernameElement.textContent = review.user;
+    topDiv.appendChild(usernameElement);
+
+    // Create the like container
+    const likeDiv = document.createElement('div');
+    likeDiv.classList.add('like-div');
+
+    // Like count
+    const likeCountElement = document.createElement('p');
+    likeCountElement.classList.add('like-count');
+    likeCountElement.textContent = review.like_count;
+    likeDiv.appendChild(likeCountElement);
+
+    // Heart icon
+    const heartIcon = document.createElement('i');
+    heartIcon.classList.add('fa-regular', 'fa-heart');
+    likeDiv.appendChild(heartIcon);
+
+    topDiv.appendChild(likeDiv);
+    reviewElement.appendChild(topDiv);
+
+    // Add rating
+    const ratingElement = document.createElement('p');
+    ratingElement.classList.add('review-rating');
+    const ratingText = document.createTextNode(`Rating: ${review.rating} `);
+    ratingElement.appendChild(ratingText);
+
+    const starIcon = document.createElement('i');
+    starIcon.classList.add('fa-solid', 'fa-star');
+    starIcon.setAttribute('aria-hidden', 'true');
+    ratingElement.appendChild(starIcon);
+
+    reviewElement.appendChild(ratingElement);
+
+    // Add comment
+    const commentElement = document.createElement('p');
+    commentElement.classList.add('review-comment');
+    commentElement.textContent = review.comment;
+    reviewElement.appendChild(commentElement);
+
+    // Append to container
+    reviewsContainer.appendChild(reviewElement);
+}
+
 
     function handleScroll() {
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
