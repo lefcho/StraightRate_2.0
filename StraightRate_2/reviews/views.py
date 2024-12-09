@@ -7,7 +7,7 @@ from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from .models import MovieReview, VideoGameReview
 from .serializers import MovieReviewSerializer, VideoGameReviewSerializer
-from ..common.models import MovieReviewLike
+from ..common.models import MovieReviewLike, VideoGameReviewLike
 
 
 class ReviewPagination(PageNumberPagination):
@@ -21,7 +21,6 @@ class MovieReviewListCreateView(ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-
         movie_id = self.kwargs.get('movie_id')
         if not movie_id:
             raise ValidationError({"error": "Movie ID is required"})
@@ -33,7 +32,6 @@ class VideoGameReviewListCreateView(ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-
         game_id = self.kwargs.get('game_id')
         if not game_id:
             raise ValidationError({"error": "Video game ID is required"})
@@ -47,6 +45,15 @@ class MovieReviewListView(ListAPIView):
     def get_queryset(self):
         movie_id = self.kwargs.get('movie_id')
         return MovieReview.objects.filter(movie_id=movie_id)
+
+
+class VideoGameReviewListView(ListAPIView):
+    serializer_class = VideoGameReviewSerializer
+    pagination_class = ReviewPagination
+
+    def get_queryset(self):
+        game_id = self.kwargs.get('game_id')
+        return VideoGameReview.objects.filter(game_id=game_id)
 
 
 class MovieReviewDetailView(RetrieveUpdateDestroyAPIView):
@@ -71,7 +78,6 @@ class VideoGameReviewDetailView(RetrieveUpdateDestroyAPIView):
         serializer.save()
 
 
-# Like or Unlike a Review
 class MovieReviewLikeView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -80,6 +86,27 @@ class MovieReviewLikeView(APIView):
         user = request.user
 
         like, created = MovieReviewLike.objects.get_or_create(user=user, movie_review=review)
+
+        if not created:
+            like.delete()
+            liked = False
+        else:
+            liked = True
+
+        return Response({
+            'liked': liked,
+            'like_count': review.likes.count()
+        })
+
+
+class VideoGameReviewLikeView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk=None):
+        review = get_object_or_404(VideoGameReview, pk=pk)
+        user = request.user
+
+        like, created = VideoGameReviewLike.objects.get_or_create(user=user, video_game_review=review)
 
         if not created:
             like.delete()
