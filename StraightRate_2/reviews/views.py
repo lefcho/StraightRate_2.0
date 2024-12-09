@@ -10,7 +10,7 @@ from .serializers import MovieReviewSerializer, VideoGameReviewSerializer
 from ..common.models import MovieReviewLike
 
 
-class MovieReviewPagination(PageNumberPagination):
+class ReviewPagination(PageNumberPagination):
     page_size = 1
     page_size_query_param = 'page_size'
     max_page_size = 10
@@ -42,7 +42,7 @@ class VideoGameReviewListCreateView(ListCreateAPIView):
 
 class MovieReviewListView(ListAPIView):
     serializer_class = MovieReviewSerializer
-    pagination_class = MovieReviewPagination
+    pagination_class = ReviewPagination
 
     def get_queryset(self):
         movie_id = self.kwargs.get('movie_id')
