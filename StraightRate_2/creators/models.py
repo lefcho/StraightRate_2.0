@@ -2,6 +2,9 @@ from django.db import models
 
 
 class Director(models.Model):
+    class Meta:
+        ordering = ['first_name', 'last_name']
+
     first_name = models.CharField(
         max_length=150,
         verbose_name='First Name',
@@ -17,6 +20,9 @@ class Director(models.Model):
 
 
 class Developer(models.Model):
+    class Meta:
+        ordering = ['developer_name',]
+
     developer_name = models.CharField(
         max_length=255,
         unique=True,
