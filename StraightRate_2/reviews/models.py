@@ -1,12 +1,15 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from StraightRate_2.common.managers import ReviewManager
 from StraightRate_2.media.models import Movie, VideoGame
 
 UserModel = get_user_model()
 
 
 class Review(models.Model):
+    objects = ReviewManager()
+
     class Meta:
         abstract = True
 
