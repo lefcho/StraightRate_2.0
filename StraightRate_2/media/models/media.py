@@ -7,6 +7,7 @@ from StraightRate_2.media.models.genres import MovieGenre, VideoGameGenre
 class AbstractMedia(models.Model):
     class Meta:
         abstract = True
+        ordering = ('title',)
 
     title = models.CharField(
         max_length=150,

@@ -1,0 +1,45 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<main>
+    <h2>All movies</h2>
+    <div class="top-movies">
+        {% for movie in movies %}
+            <a href="{% url 'details-movie' movie.pk %}">
+                <div class="movie">
+                    <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+                    <h3>{{ movie.title }}</h3>
+                    <p>{{ movie.get_average_rating }}<i class="fa-solid fa-star"></i></p>
+                </div>
+            </a>
+        {% empty %}
+            <p class="no-content-p">No movies added yet!</p>
+        {% endfor %}
+    </div>
+{% if movies %}
+<div class="pagination-div">
+    {% if not page_obj.has_next and page_obj.number == 1 %}
+        <p>That's the only page for now</p>
+    {% else %}
+        <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class="pagination-btn" href="?page=1">&laquo; first</a>
+                <a class="pagination-btn" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a class="pagination-btn" href="?page={{ page_obj.next_page_number }}">next</a>
+                <a class="pagination-btn" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+        </div>
+    {% endif %}
+</div>
+{% endif %}
+</main>
+{% endblock %}

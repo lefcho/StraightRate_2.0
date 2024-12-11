@@ -1,0 +1,47 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<main>
+    <h2>All Video Games</h2>
+    <div class="top-video-games">
+        {% for game in games %}
+            <a href="{% url 'details-games' game.pk %}">
+                <div class="game">
+                    <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
+                    <h3>{{ game.title }}</h3>
+                    <p>{{ game.get_average_rating }}<i class="fa-solid fa-star"></i></p>
+                </div>
+            </a>
+        {% empty %}
+            <p class="no-content-p">No video games added yet!</p>
+        {% endfor %}
+    </div>
+{% if games %}
+<div class="pagination-div">
+    {% if not page_obj.has_next and page_obj.number == 1 %}
+        <p>That's the only page for now</p>
+    {% else %}
+        <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class="pagination-btn" href="?page=1">&laquo; first</a>
+                <a class="pagination-btn" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a class="pagination-btn" href="?page={{ page_obj.next_page_number }}">next</a>
+                <a class="pagination-btn" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+        </div>
+    {% endif %}
+</div>
+{% endif %}
+</main>
+    
+    
+{% endblock %}

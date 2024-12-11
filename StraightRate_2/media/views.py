@@ -138,3 +138,17 @@ class VideoGameByGenreView(ListView):
         context = super().get_context_data(object_list=None, **kwargs)
         context['genre'] = self.kwargs['genre']
         return context
+
+
+class AllMoviesView(ListView):
+    model = Movie
+    context_object_name = 'movies'
+    paginate_by = 20
+    template_name = 'movies/all-movies.html'
+
+
+class AllVideoGamesView(ListView):
+    model = VideoGame
+    context_object_name = 'games'
+    paginate_by = 20
+    template_name = 'video-games/all-video-games.html'

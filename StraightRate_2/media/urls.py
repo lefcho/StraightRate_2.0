@@ -12,5 +12,7 @@ urlpatterns = [
     path('approve-video-game/<int:pk>/', views.approve_game, name='approve-game'),
     path('movies/genre/<str:genre>/', views.MovieByGenreView.as_view(), name='movies-by-genre'),
     path('video-games/genre/<str:genre>/', views.VideoGameByGenreView.as_view(), name='games-by-genre'),
+    path('all-movies/', views.AllMoviesView.as_view(), name='all-movies'),
+    path('all-video-games/', views.AllVideoGamesView.as_view(), name='all-games'),
 
 ]
