@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-export function getCookie(name) {
+function getCookie(name) {
     const cookies = document.cookie.split(';');
     for (const cookie of cookies) {
         const [key, value] = cookie.trim().split('=');

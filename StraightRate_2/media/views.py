@@ -15,11 +15,13 @@ class MovieDetailsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_review = MovieReview.objects.filter(movie=self.object, user=self.request.user).first()
-        if user_review:
-            context['user_review_id'] = user_review.id
+
+        if self.request.user.is_authenticated:
+            user_review = MovieReview.objects.filter(movie=self.object, user=self.request.user).first()
+            context['user_review_id'] = user_review.id if user_review else 0
         else:
             context['user_review_id'] = 0
+
         return context
 
 
@@ -30,12 +32,15 @@ class VideoGameDetailsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_review = VideoGameReview.objects.filter(game=self.object, user=self.request.user).first()
-        if user_review:
-            context['user_review_id'] = user_review.id
-        else:
-            context['user_review_id'] = 0
-        return context
+
+        if self.request.user.is_authenticated:
+            user_review = VideoGameReview.objects.filter(game=self.object, user=self.request.user).first()
+            if user_review:
+                context['user_review_id'] = user_review.id
+            else:
+                context['user_review_id'] = 0
+
+            return context
 
 
 class MovieCreateView(PermissionRequiredMixin, CreateView):

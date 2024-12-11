@@ -1,4 +1,12 @@
-import {getCookie} from "./reviewHandler.js";
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+        const [key, value] = cookie.trim().split('=');
+        if (key === name) return value;
+    }
+    return null;
+}
+
 
 const mediaDataElement = document.getElementById('media-data');
 const mediaId = mediaDataElement.dataset.mediaId;
@@ -6,6 +14,7 @@ const mediaType = mediaDataElement.dataset.mediaType;
 const isMovie = (mediaType === "movie");
 const reviewsContainer = document.getElementById('reviews-container');
 const loadingIndicator = document.getElementById('loading-indicator');
+const userAuthenticated = mediaDataElement.dataset.userAuth === "true";
 
 document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
@@ -71,7 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create the like container
         const likeDiv = document.createElement('div');
         likeDiv.classList.add('like-div');
-        likeDiv.addEventListener('click', () => handleLike(review.id, likeCountElement, heartIcon));
+        likeDiv.addEventListener('click', () => {
+            if (userAuthenticated) {
+                handleLike(review.id, likeCountElement, heartIcon);
+            } else {
+                const currentUrl = window.location.pathname + window.location.search;
+                window.location.href = `/accounts/login/?next=${encodeURIComponent(currentUrl)}`;
+            }
+        });
+
 
         // Like count
         const likeCountElement = document.createElement('p');
@@ -119,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let like_url;
 
         if (isMovie) {
-            like_url =`/reviews/like/movie-review/${reviewId}/`;
+            like_url = `/reviews/like/movie-review/${reviewId}/`;
         } else {
             like_url = `/reviews/like/game-review/${reviewId}/`;
         }
