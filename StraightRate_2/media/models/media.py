@@ -7,7 +7,6 @@ from StraightRate_2.media.models.genres import MovieGenre, VideoGameGenre
 class AbstractMedia(models.Model):
     class Meta:
         abstract = True
-        ordering = ('title',)
 
     title = models.CharField(
         max_length=150,
@@ -42,6 +41,8 @@ class Movie(AbstractMedia):
             ('can_approve_movies', 'Can approve movies'),
         ]
 
+        ordering = ['title', ]
+
     genres = models.ManyToManyField(
         to=MovieGenre,
         related_name='movies',
@@ -70,6 +71,8 @@ class VideoGame(AbstractMedia):
             ('can_suggest_games', 'Can suggest video games'),
             ('can_approve_games', 'Can approve video games'),
         ]
+
+        ordering = ['title', ]
 
     genres = models.ManyToManyField(
         to=VideoGameGenre,
