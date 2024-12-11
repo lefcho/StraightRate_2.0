@@ -8,6 +8,7 @@
     max-width: 60%;
     padding: 2em;
     margin: 2em auto auto;
+    margin-top: 5em;
     border-radius: 10px;
     -webkit-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
     -moz-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
@@ -290,4 +291,8 @@ textarea {
     cursor: pointer;
     color: #1eda9a;
     background-color: black;
+}
+
+.review-section {
+    margin-top: 8em;
 }
