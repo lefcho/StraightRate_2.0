@@ -17,6 +17,17 @@ class DirectorBaseForm(forms.ModelForm):
             'last_name': '',
         }
 
+    def save(self, commit=True):
+        director = super().save(commit=False)
+
+        director.first_name = director.first_name.lower().capitalize().strip()
+        director.last_name = director.last_name.lower().capitalize().strip()
+
+        if commit:
+            director.save()
+
+        return director
+
 
 class DeveloperBaseForm(forms.ModelForm):
     class Meta:
@@ -32,6 +43,16 @@ class DeveloperBaseForm(forms.ModelForm):
             'developer_name': '',
             'website': '',
         }
+
+    def save(self, commit=True):
+        developer = super().save(commit=False)
+
+        developer.developer_name = developer.developer_name.strip()
+
+        if commit:
+            developer.save()
+
+        return developer
 
 
 class DirectorCreateForm(DirectorBaseForm):
