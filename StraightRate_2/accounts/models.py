@@ -3,6 +3,9 @@ from django.db import models
 
 
 class User(AbstractUser):
-    points = models.IntegerField(
+    email = models.EmailField(
+        unique=True,
+    )
+    points = models.PositiveIntegerField(
         default=0,
     )
