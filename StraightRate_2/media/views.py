@@ -40,7 +40,7 @@ class VideoGameDetailsView(DetailView):
             else:
                 context['user_review_id'] = 0
 
-            return context
+        return context
 
 
 class MovieCreateView(PermissionRequiredMixin, CreateView):
@@ -151,9 +151,19 @@ class AllMoviesView(ListView):
     paginate_by = 20
     template_name = 'movies/all-movies.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['movies'] = self.object_list.filter(approved=True)
+        return context
+
 
 class AllVideoGamesView(ListView):
     model = VideoGame
     context_object_name = 'games'
     paginate_by = 20
     template_name = 'video-games/all-video-games.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['games'] = self.object_list.filter(approved=True)
+        return context

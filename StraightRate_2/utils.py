@@ -2,6 +2,7 @@ from django.contrib.auth.models import Group
 from django.db.models import Count
 from StraightRate_2.reviews.models import MovieReview, VideoGameReview
 
+# intentionally kept low for easy testing
 PROPOSER_POINTS = 10
 REDACTOR_POINTS = 20
 

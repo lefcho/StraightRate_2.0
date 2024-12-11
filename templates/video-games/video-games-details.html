@@ -102,9 +102,11 @@
         </div>
     </main>
 
-    <script type="module" src="{% static 'scripts/reviewHandler.js' %}"></script>
-    <script type="module" src="{% static 'scripts/handleStars.js' %}"></script>
-    <script type="module" src="{% static 'scripts/editReviewButtonsHandler.js' %}"></script>
+    {% if request.user.is_authenticated %}
+        <script type="module" src="{% static 'scripts/handleStars.js' %}"></script>
+        <script type="module" src="{% static 'scripts/editReviewButtonsHandler.js' %}"></script>
+        <script type="module" src="{% static 'scripts/reviewHandler.js' %}"></script>
+    {% endif %}
     <script type="module" src="{% static 'scripts/loadReviews.js' %}"></script>
 
 {% endblock %}
