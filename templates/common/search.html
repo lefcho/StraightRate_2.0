@@ -12,8 +12,8 @@
                         <div class="movie">
                             <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
                             <h3>{{ movie.title }}</h3>
-                            {% if movie.average_rating %}
-                                <p>Rating: {{ movie.average_rating }} <i class="fa-solid fa-star"></i></p>
+                            {% if movie.get_average_rating %}
+                                <p>Rating: {{ movie.get_average_rating }} <i class="fa-solid fa-star"></i></p>
                             {% else %}
                                 <p>Not reviewed yet.</p>
                             {% endif %}
@@ -33,8 +33,8 @@
                         <div class="movie">
                             <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
                             <h3>{{ game.title }}</h3>
-                            {% if game.average_rating %}
-                                <p>Rating: {{ game.average_rating }} <i class="fa-solid fa-star"></i></p>
+                            {% if game.get_average_rating %}
+                                <p>Rating: {{ game.get_average_rating }} <i class="fa-solid fa-star"></i></p>
                             {% else %}
                                 <p>Not reviewed yet.</p>
                             {% endif %}
