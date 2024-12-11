@@ -1,0 +1,272 @@
+[33mcommit f124f3ea80d6626619946ab1bc6918bf95e1cfae[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 22:22:48 2024 +0200
+
+    fixed: final fixes
+
+[33mcommit acfea1fe1ac2a8d8019d24a45d4afbf2dc4e94ee[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 20:50:54 2024 +0200
+
+    fixed: proper message shows in approve list
+
+[33mcommit 31589238300d56a101c29cca0e03683ea8af9220[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 20:47:12 2024 +0200
+
+    added unique email addresses
+
+[33mcommit 0411f0aa0946db6af4c8344d7b092ccd9efcd01d[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 20:34:17 2024 +0200
+
+    fixed: not showing proper rating in search.html
+
+[33mcommit a5df4b1040b459340031dc8103a7f64aa4d7ecba[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 20:29:35 2024 +0200
+
+    added: .env.template
+
+[33mcommit 598638a9adda9b903cc2691dc5feac4c435b1d85[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 20:23:49 2024 +0200
+
+    changed: settings and utils
+
+[33mcommit 3ec7e28c5b6af9c471f1865881269eee7d2e916e[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 20:16:03 2024 +0200
+
+    added: movie model test + director form test
+
+[33mcommit 5c59f8c28583e24a5c9a2231cbf2f57b7c9a87de[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 19:49:12 2024 +0200
+
+    added: view testing
+
+[33mcommit 0d82ac11aa6d80fdd504e0a7ca8ae1199b3c30e6[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 18:34:34 2024 +0200
+
+    added: requirements.txt
+
+[33mcommit 5f86a01bb788ab9d904d16afbb237c198c7262e7[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 18:18:47 2024 +0200
+
+    added: ordering to media
+
+[33mcommit 901bb51bd3ec7677109d32ffac1d90feebc48f54[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 18:13:55 2024 +0200
+
+    fixed: better styling
+
+[33mcommit 5cc326f0498b4aa89f6a9dddd9570ca99e61fe7a[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 17:50:45 2024 +0200
+
+    fixed: fixes
+
+[33mcommit 650f44c67b3988c41bb7ac6bf0da0ecbbf27232b[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 17:33:44 2024 +0200
+
+    fixed: points in the profile page now show correctly
+
+[33mcommit 2a65800c60d57492e3df3d6364eebc6071bb445a[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 17:26:40 2024 +0200
+
+    added: anonymous users now interact with the review correctly
+
+[33mcommit fa578ab4a2e383715e1cf9e5a428b699cf54e4d7[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Wed Dec 11 16:51:08 2024 +0200
+
+    added: all movies and video games page
+
+[33mcommit 97735684c72688981824217a3db383e04ae97e60[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Tue Dec 10 02:35:12 2024 +0200
+
+    added: admins extended
+
+[33mcommit 0102003a8ff0aef7b465d456f1a2ed145440c132[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Tue Dec 10 02:13:23 2024 +0200
+
+    added: ordering to review models
+
+[33mcommit ef959b40cae8e2f7910771535c0cf2717ae26d8c[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Tue Dec 10 02:03:31 2024 +0200
+
+    added: ordering to developer model
+
+[33mcommit ef5f40caeaf03a2579bd5203e13fa3cf7288fde5[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Mon Dec 9 21:11:29 2024 +0200
+
+    added: video game reviews now work properly
+
+[33mcommit 35c6481f20b3a8a288969ad5db7c39412209e5d6[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Mon Dec 9 20:58:01 2024 +0200
+
+    added: video game reviews urls and views
+
+[33mcommit d3d7916545b719651cffa9ae0e414d7802051dad[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Mon Dec 9 20:24:15 2024 +0200
+
+    added: movie likes work perfectly
+
+[33mcommit e726585e1c0ece169e1776a4d644caa5ac88e115[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Mon Dec 9 20:23:23 2024 +0200
+
+    added: movie likes work perfectly
+
+[33mcommit bebe0cb4e6294f10b6cf6680e860b00a7f44ec72[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Mon Dec 9 19:40:28 2024 +0200
+
+    added: like reviews element
+
+[33mcommit c776cd6ffe4feb06621b84c87962697917557d78[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Mon Dec 9 18:35:15 2024 +0200
+
+    added: reviews for movies load dynamically
+
+[33mcommit c1f83c461d154fe85919e3bc99ba35eb67a1053d[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Mon Dec 9 17:38:24 2024 +0200
+
+    updated: pagination is now 5
+
+[33mcommit 62d55def6e20f332c4006938565374a1eaf09960[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 23:08:21 2024 +0200
+
+    fixed: some urls now working properly
+
+[33mcommit 0250ced549f7286ff19cfd26b961da74429a9424[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 22:55:31 2024 +0200
+
+    added: can properly review and edit review on games
+
+[33mcommit e0163186d4054879fefba268c4ce53f24880fbfa[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 22:53:58 2024 +0200
+
+    added: can properly review and edit review on games
+
+[33mcommit 875065a5426f233a34547a5c357bcf2cccec873d[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 22:30:07 2024 +0200
+
+    added: game details template
+
+[33mcommit 3ac3ff93ea12d3bda427846d16a5fa789445e7de[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 22:10:00 2024 +0200
+
+    added: game details view
+
+[33mcommit 19e017f33c982a43dcd5b72122121251dbca755a[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 20:21:27 2024 +0200
+
+    added: game review views and serializers
+
+[33mcommit 00ad693c1f7efa19cf4806f419297226079c77ed[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 19:59:29 2024 +0200
+
+    added: now user can edit reviews properly
+
+[33mcommit ff06cc342ca2bac1d0dfcf587639640a838e305b[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 19:54:22 2024 +0200
+
+    added: now user can edit reviews properly
+
+[33mcommit d4f7defaa55cf7214b6293070921e8ed7567346c[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 19:23:39 2024 +0200
+
+    added: now when the user has review the movie it loads the form correctly
+
+[33mcommit 67261bb24403664e6081485d0fa5f98d5c22b7f8[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 18:47:33 2024 +0200
+
+    fixed: struggling less with JS / can properly post review for movie
+
+[33mcommit 43bb0bfbfc021914c0083b047fe3b8c8673952a5[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 18:40:29 2024 +0200
+
+    fixed: struggling less with JS / can properly post review for movie
+
+[33mcommit bd8e247520622a7bee8cb41c2d2b018023a5efd6[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sun Dec 8 02:11:32 2024 +0200
+
+    added: struggling with JS
+
+[33mcommit f7fa7dd739199347aee295e89f648300bf0247aa[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sat Dec 7 20:15:38 2024 +0200
+
+    added: after submitting a review buttons behaviour
+
+[33mcommit 55aab06190808f5ea5ff41469d113665bcc2eaf0[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sat Dec 7 19:12:02 2024 +0200
+
+    added: now can post reviews REST - -fully
+
+[33mcommit b6633dab28bb0ff4341bbdd87c474b1a0e1dda55[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sat Dec 7 19:10:29 2024 +0200
+
+    added: now can post reviews REST - -fully
+
+[33mcommit 8f680b6a772af7db82513b41d4dd358cb31b791d[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sat Dec 7 18:33:04 2024 +0200
+
+    added: posters
+
+[33mcommit db8be569a2c7cedf6feab0e362c1eaccf198324c[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sat Dec 7 18:32:54 2024 +0200
+
+    added: JS renders the review form
+
+[33mcommit c846430c4c6b6b5c58d2519a6350a5633841ec04[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Sat Dec 7 18:32:03 2024 +0200
+
+    reworked: the movie view is now not an API view
+
+[33mcommit 179912efd85e1ae147d96ccf1604b3910af3cf1f[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Fri Dec 6 20:55:53 2024 +0200
+
+    fixed: search results show approved media only
+
+[33mcommit 227d56b25c9fdc38e3cacd1e084c948205c3dbe4[m
+Author: ivand <ivan.d.kostov@gmail.com>
+Date:   Fri Dec 6 20:53:31 2024 +0200
+
+    added: director and developer details templates
+
+[33mcommit 1573a03386759d29a3e896655f33f746a7706418[m
+Author: ivand <ivan.d.kostov@gmail.com>

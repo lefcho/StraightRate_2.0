@@ -72,6 +72,7 @@ main h2 {
     display: flex;
     justify-content: center;
     gap: 2em;
+    max-width: 60%;
     flex-wrap: wrap;
     background-color: rgba(0, 0, 0, 0.888);
     padding: 2em;

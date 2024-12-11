@@ -56,8 +56,6 @@ class Movie(AbstractMedia):
 
     poster = models.ImageField(
         upload_to='posters/movies/',
-        null=True,
-        blank=True,
         verbose_name='Poster',
     )
 
@@ -89,8 +87,6 @@ class VideoGame(AbstractMedia):
 
     poster = models.ImageField(
         upload_to='posters/games/',
-        null=True,
-        blank=True,
     )
 
     def __str__(self):
