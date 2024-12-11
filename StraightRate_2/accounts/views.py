@@ -6,7 +6,8 @@ from django.views.generic import CreateView, UpdateView, DetailView
 
 from StraightRate_2.accounts.forms import RegisterForm, LoginForm, AppUserChangeForm
 from StraightRate_2.reviews.models import MovieReview, VideoGameReview
-from StraightRate_2.utils import calculate_user_points, update_user_groups
+from StraightRate_2.utils import calculate_user_points, update_user_groups, PROPOSER_POINTS, REDACTOR_POINTS, \
+    REVIEW_REWARD_POINTS, LIKE_REWARD_POINTS
 
 UserModel = get_user_model()
 
@@ -43,6 +44,10 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         context['movie_reviews'] = MovieReview.objects.filter(user=self.request.user)
         context['video_game_reviews'] = VideoGameReview.objects.filter(user=self.request.user)
         context['form'] = AppUserChangeForm(instance=self.request.user)
+        context['proposer_points'] = PROPOSER_POINTS
+        context['redactor_points'] = REDACTOR_POINTS
+        context['review_reward_points'] = REVIEW_REWARD_POINTS
+        context['like_rewards_points'] = LIKE_REWARD_POINTS
 
         return context
 
