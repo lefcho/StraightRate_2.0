@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence:BLED,XELA,YELA@9,32,17&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+.error-container {
+    padding-top: 3em;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4em;
+}
+
+.error-text-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-image-cont img{
+    max-width: 600px;
+    height: auto;
+}
+
+.error-text {
+    font-size: 3em;
+    font-family: "Sixtyfour Convergence", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "BLED" 9,
+      "SCAN" 0,
+      "XELA" 32,
+      "YELA" 17;
+    line-height: 1.3em;
+    padding-bottom: 2em;
+}
+
+
+.go-home-btn {
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    text-transform: uppercase;
+    padding: 1em;
+    background-color: transparent;
+}
+
+.wrapper-home-btn{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .go-home-btn{
+    display: block;
+    width: 200px;
+    height: 90px;
+    line-height: 40px;
+    font-size: 1.5em;
+    font-weight: 800;
+    text-decoration: none;
+    color: #333;
+    border: 2px solid #333;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+  }
+  
+  .go-home-btn span{
+    z-index: 1000;
+  }
+  
+  .go-home-btn:after{
+    z-index: 0;
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #af032e;
+    transition: all .35s;
+  }
+  
+  .go-home-btn:hover{
+    z-index: 100;
+    color: #fff;
+  }
+  
+  .go-home-btn:hover:after{
+    width: 100%;
+    z-index: -1;
+  }
