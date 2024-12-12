@@ -3,8 +3,8 @@ from django.db.models import Count
 from StraightRate_2.reviews.models import MovieReview, VideoGameReview
 
 # Intentionally kept low for easy manual testing
-PROPOSER_POINTS = 10
-REDACTOR_POINTS = 20
+PROPOSER_POINTS = 0
+REDACTOR_POINTS = 0
 
 LIKE_REWARD_POINTS = 10
 REVIEW_REWARD_POINTS = 5
