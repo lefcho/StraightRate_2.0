@@ -21,7 +21,7 @@ Straight Rate 2 is a website that allows users to create profiles and rate movie
   - `('can_approve_games', 'Can approve video games')`
 
 3. At the start the users will have 0 points so you will need to change the requirement for these groups under:
-   **StraightRate_2\utils.py**
+   **StraightRate_2\utils.py**, if you want to add media via the website.
 ---
 
 ## The App Uses:
