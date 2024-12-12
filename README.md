@@ -6,8 +6,9 @@ Straight Rate 2 is a website that allows users to create profiles and rate movie
 - **Redactors** can approve those suggestions, and the media will be added to the website.
 
 ## IMPORTANT!
+1. You will need to add genres to the database yourself.
 
-In order to approve and suggest media, you will need to create the following groups:
+2. In order to approve and suggest media, you will need to create the following groups:
 
 - **Proposer:**  
   Give permissions:  
@@ -19,6 +20,8 @@ In order to approve and suggest media, you will need to create the following gro
   - `('can_approve_movies', 'Can approve movies')`
   - `('can_approve_games', 'Can approve video games')`
 
+3. At the start the users will have 0 points so you will need to change the requirement for these groups under:
+   **StraightRate_2\utils.py**
 ---
 
 ## The App Uses:
