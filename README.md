@@ -10,12 +10,12 @@ Straight Rate 2 is a website that allows users to create profiles and rate movie
 
 2. In order to approve and suggest media, you will need to create the following groups:
 
-- **Proposer:**  
+- **"Proposer":**  
   Give permissions:  
   - `('can_suggest_movies', 'Can suggest movies')`
   - `('can_suggest_games', 'Can suggest video games')`
 
-- **Redactor:**  
+- **"Redactor":**  
   Give permissions:  
   - `('can_approve_movies', 'Can approve movies')`
   - `('can_approve_games', 'Can approve video games')`
