@@ -1,6 +1,6 @@
 # Straight Rate 2
 
-**Production** (a day late): [staightrate-c5hgb9cucndjhphf.italynorth-01.azurewebsites.net](https://staightrate-c5hgb9cucndjhphf.italynorth-01.azurewebsites.net)
+**Production**: [staightrate-c5hgb9cucndjhphf.italynorth-01.azurewebsites.net](https://staightrate-c5hgb9cucndjhphf.italynorth-01.azurewebsites.net)
 
 Straight Rate 2 is a website that allows users to create profiles and rate movies and video games. Users can earn points by reviewing the media posted on the website. There are two thresholds that a user can reach with these points: **Proposer** and **Redactor**.
 
